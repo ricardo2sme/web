@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RDS://~ · Ricardo Dos Santos</title>
+  <meta name="description" content="Ricardo Dos Santos · Product & UX Designer. A terminal portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- CRT effects -->
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Boot screen -->
+  <div id="boot" class="boot">
+    <pre id="bootLog" class="boot-log"></pre>
+  </div>
+
+  <!-- Terminal -->
+  <div class="terminal" id="terminal" hidden>
+
+    <!-- Header -->
+    <header class="sys-header">
+      <div class="sys-left">
+        <button class="sys-prompt sys-home" data-cmd="home" title="home">@ricardo2s.me</button><span class="dim"> : </span><span class="sys-path" id="sysPath">~</span>
+      </div>
+      <div class="sys-right">
+        <span class="sys-pair"><a class="sys-mail" href="mailto:yo@ricardo2s.me">yo@ricardo2s.me</a></span>
+        <span class="sys-sep">·</span>
+        <span class="sys-pair"><span class="dim">uptime</span> <span id="uptime">00:00:00</span></span>
+        <span class="sys-sep">·</span>
+        <span class="sys-status">
+          <span class="status-dot"></span><span>AVAILABLE</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- Main output -->
+    <main class="output" id="output">
+
+      <!-- HOME -->
+      <section class="page is-active" id="page-home">
+        <pre class="ascii" aria-label="RDS">██████╗  ██████╗  ███████╗
+██╔══██╗ ██╔══██╗ ██╔════╝
+██████╔╝ ██║  ██║ ███████╗
+██╔══██╗ ██║  ██║ ╚════██║
+██║  ██║ ██████╔╝ ███████║
+╚═╝  ╚═╝ ╚═════╝  ╚══════╝</pre>
+
+        <div class="welcome-box">
+          <div class="welcome-head">
+            <span class="sparkle">✻</span> Welcome. I'm <span class="hl">Ricardo Dos Santos</span>.
+          </div>
+          <div class="welcome-role">Product &amp; UX Designer · Sondrio, IT</div>
+
+          <div class="welcome-divider"></div>
+
+          <div class="kv-block welcome-kv">
+            <div class="kv"><span class="dim">role .........</span><span>OneHQ (5 years)</span></div>
+            <div class="kv"><span class="dim">focus ........</span><span>complex workflows · dense UI · design systems</span></div>
+            <div class="kv"><span class="dim">status .......</span><span class="accent">open to new work</span></div>
+          </div>
+
+          <div class="welcome-sub">
+            /help for commands · <span class="dim">cwd:</span> <span class="mono-link">~/ricardo2s.me</span>
+          </div>
+        </div>
+
+        <p class="lede">
+          I design tools that make complex work feel simple.<br />
+          <span class="dim">// less noise, more flow</span>
+        </p>
+
+        <div class="hint">
+          <span class="dim">→ try</span>
+          <button class="cmd-chip" data-cmd="work">work</button>
+          <button class="cmd-chip" data-cmd="about">about</button>
+          <button class="cmd-chip" data-cmd="help">help</button>
+        </div>
+      </section>
+
+      <!-- WORK -->
+      <section class="page" id="page-work">
+        <div class="page-head">
+          <span class="dim">$ ls -la /work/</span>
+        </div>
+
+        <div class="file-list">
+
+          <div class="file" data-target="page-com-hub">
+            <div class="file-row">
+              <span class="file-perm">drwxr-xr-x</span>
+              <span class="file-size">2024</span>
+              <span class="file-name">onehq-comhub<span class="file-ext">.case</span></span>
+              <span class="file-meta-tag dim">Product Design</span>
+              <button class="file-open" data-cmd="cat onehq-comhub">[ open ]</button>
+            </div>
+            <div class="file-desc">
+              <span class="dim">»</span> A persistent workbar + Speed Work mode. Less tab hopping, faster sends, clearer ownership.
+            </div>
+          </div>
+
+          <div class="file" data-target="page-reports">
+            <div class="file-row">
+              <span class="file-perm">drwxr-xr-x</span>
+              <span class="file-size">2023</span>
+              <span class="file-name">onehq-reports<span class="file-ext">.case</span></span>
+              <span class="file-meta-tag dim">Data UX</span>
+              <button class="file-open" data-cmd="cat onehq-reports">[ open ]</button>
+            </div>
+            <div class="file-desc">
+              <span class="dim">»</span> Compose client-ready reports from live data. Versioning, branding, scheduled delivery.
+            </div>
+          </div>
+
+          <div class="file file-locked">
+            <div class="file-row">
+              <span class="file-perm dim">----------</span>
+              <span class="file-size dim">2025</span>
+              <span class="file-name dim">in-flight<span class="file-ext">.case</span></span>
+              <span class="file-meta-tag dim">[ NDA ]</span>
+              <span class="file-open dim">[ locked ]</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="page-foot dim">
+          2 entries shown · 1 hidden under NDA
+        </div>
+      </section>
+
+      <!-- CASE: COMHUB (rewritten, senior IC voice, no em dashes) -->
+      <section class="page page-case" id="page-com-hub">
+        <div class="breadcrumb">
+          <button class="link" data-cmd="work">../work</button>
+          <span class="dim">/</span>
+          <span>onehq-comhub.case</span>
+        </div>
+
+        <h1 class="case-title">Work &amp; Communication Hub</h1>
+
+        <div class="case-meta">
+          <div class="kv"><span class="dim">client ......</span><span>OneHQ</span></div>
+          <div class="kv"><span class="dim">role ........</span><span>Product Designer (IC)</span></div>
+          <div class="kv"><span class="dim">team ........</span><span>1 PM · 2 Engineers · 1 Designer</span></div>
+          <div class="kv"><span class="dim">duration ....</span><span>6 months</span></div>
+          <div class="kv"><span class="dim">surface .....</span><span>Web app · enterprise</span></div>
+        </div>
+
+        <div class="case-tldr">
+          <span class="case-tldr-label">tl;dr</span>
+          Shipped a sticky workbar and a Speed Work toggle. Median time-to-send dropped from 47s to 19s for power users. The hard part wasn't the workbar. It was convincing the PM that a toggle for 12% of users was worth building.
+        </div>
+
+        <figure class="case-img hero">
+          <figcaption>./comhub/hero.png</figcaption>
+          <img src="https://framerusercontent.com/images/jhfTrQcHupgnMjg3j3FL5sgNBIA.png?width=3900&amp;height=2970" alt="OneHQ Work & Communication Hub hero screen" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># how this started</h2>
+        <p>
+          Our best rep had seven product tabs open when I shadowed her one morning. She was sending a renewal reminder. She'd normalized it.
+        </p>
+        <p>
+          I spent two weeks shadowing five more people. Every one of them had built their own system: saved URLs, sticky notes, a shared spreadsheet one of them called "the graveyard." The product wasn't broken. It had just never been designed for this volume of work.
+        </p>
+
+        <div class="case-quote">
+          "I'm not slow. I just have a lot of windows."
+          <span class="attr">Ang, account manager, 4 years tenure</span>
+        </div>
+
+        <h2 class="case-h2"># what we measured before touching anything</h2>
+        <p>
+          I refused to open Figma until we had numbers. Every improvement had to map back to one of these.
+        </p>
+
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">median time-to-send</span>
+            <span class="case-metric-value">47 seconds (p95: 2m 14s)</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">context switches per send</span>
+            <span class="case-metric-value">6.2</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">template reuse rate</span>
+            <span class="case-metric-value">11%</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">"who's sending this?" pings per day</span>
+            <span class="case-metric-value">34 per team</span>
+          </div>
+        </div>
+
+        <h2 class="case-h2"># the design bet: one surface, always visible</h2>
+        <p>
+          We weighed three directions.
+        </p>
+        <ol class="case-list numbered">
+          <li>A full-screen composer (what competitors do).</li>
+          <li>A command palette ("cmd+k but for sending").</li>
+          <li>A persistent dock at the bottom of the workspace.</li>
+        </ol>
+        <p>
+          We shipped option three. The composer tested fastest in isolation but broke the moment reps had to cross-reference client data mid-send. The command palette tested great with our three power users and poorly with everyone else.
+        </p>
+
+<div class="diagram">┌──────────────────────────────────────────────────┐
+│  workspace                              [user] ▾ │
+├──────────────────────────────────────────────────┤
+│                                                  │
+│           main content (clients, threads)        │
+│                                                  │
+├──────────────────────────────────────────────────┤
+│ <span class="em">[campaign ▾] [template ▾]</span>  <span class="hl">[⚡ speed]</span>   <span class="em">[send →]</span> │  ← persistent workbar
+└──────────────────────────────────────────────────┘</div>
+
+        <figure class="case-img">
+          <figcaption>./comhub/workbar.png</figcaption>
+          <img src="https://framerusercontent.com/images/4hnTdQ4eM2oupm8NrTXyLhJCDY.png?width=3900&amp;height=2970" alt="Persistent workbar: campaign, template, speed toggle, send" loading="lazy" />
+        </figure>
+
+        <p>
+          The workbar stays visible across the whole workspace. You open a client, the workbar knows. You switch to a thread, it follows. Campaign and template live as dropdowns. Send lives there. That's the whole ceremony.
+        </p>
+
+        <h2 class="case-h2"># speed work (the unpopular idea)</h2>
+        <p>
+          Power users kept telling us they didn't need the preview. They didn't need the confirm modal. They wanted a button that fired.
+        </p>
+        <p>
+          Building a "power mode" for 12% of users is a hard sell. It looks like scope creep. The pitch that landed wasn't "power users want this." It was: <span class="hl">those 12% of users drive 58% of our sends. When they're slow, revenue is slow.</span>
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./comhub/speed-work.png</figcaption>
+          <img src="https://framerusercontent.com/images/90N0RcqJnWO37IsF8lnlDgGgSc.png?width=4380&amp;height=2970" alt="Speed Work mode with minimal UI and optimistic send" loading="lazy" />
+        </figure>
+
+        <p>
+          Speed Work is one toggle. On: no preview modal, optimistic send, a 5-second undo toast. Off: the default path, unchanged. No one was forced to use it. It spread anyway, user to user, the way good tools do.
+        </p>
+
+        <h2 class="case-h2"># ownership (the thing I underestimated)</h2>
+        <p>
+          "Who's sending this one" sounded like a polish issue. It wasn't. I lost two weeks to it. In a team of 8 reps covering 400 clients, message authorship is a coordination problem, not a display problem.
+        </p>
+        <p>
+          We ended up with identity pills: avatar, name, role badge, visible in the composer, in the thread, and in the send receipt. It looks obvious in the final design. It took four rounds to get there.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./comhub/preview.png</figcaption>
+          <img src="https://framerusercontent.com/images/fwu3Gv7RvWqyFETb7qd16ZQXdA.png?width=3900&amp;height=2970" alt="Preview dialog with sender identity and template variable diff" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># what shipped, what got cut</h2>
+        <div class="shipcut">
+          <div class="shipcut-col shipped">
+            <h4>shipped</h4>
+            <ul>
+              <li>persistent workbar</li>
+              <li>speed work toggle</li>
+              <li>identity pills across composer, thread, receipt</li>
+              <li>preview with template variable diff</li>
+              <li>undo toast (5s, keyboard shortcut)</li>
+            </ul>
+          </div>
+          <div class="shipcut-col cut">
+            <h4>cut / deferred</h4>
+            <ul>
+              <li>scheduled send (engineering scoping risk)</li>
+              <li>AI-suggested replies (not enough training data)</li>
+              <li>manager analytics dashboard (out of scope)</li>
+              <li>shared drafts (punted to v2)</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="case-h2"># numbers, 90 days post-launch</h2>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">median time-to-send</span>
+            <span class="case-metric-value"><span class="was">47s</span><span class="arrow">›</span><span class="now">19s</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">context switches per send</span>
+            <span class="case-metric-value"><span class="was">6.2</span><span class="arrow">›</span><span class="now">2.1</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">template reuse rate</span>
+            <span class="case-metric-value"><span class="was">11%</span><span class="arrow">›</span><span class="now">38%</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">coordination pings per day</span>
+            <span class="case-metric-value"><span class="was">34</span><span class="arrow">›</span><span class="now">9</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">speed work adoption (eligible users)</span>
+            <span class="case-metric-value"><span class="now">71%</span></span>
+          </div>
+        </div>
+
+        <h2 class="case-h2"># what I'd do differently</h2>
+        <p>
+          The first version of the workbar had too many features. I tried to solve three problems at once. We stripped it twice before launch and it still felt busy. Next time I'd start with a smaller workbar and earn the real estate.
+        </p>
+        <p>
+          I also shipped Speed Work without an onboarding flow, assuming it'd spread organically. It did, but slowly. A 20-second tooltip tour would have cut adoption time in half.
+        </p>
+
+        <h2 class="case-h2"># credit</h2>
+        <p class="dim small">
+          Shipped with 1 PM and 2 engineers. The workbar interaction model and identity system were my design. The Speed Work optimistic-UI behavior was a joint design with eng, who owned the reconciliation logic. Ownership pills live in the design system.
+        </p>
+
+        <div class="case-foot">
+          // onehq-comhub.case · end of file · type <span class="kbd">cat onehq-reports</span> for the next one.
+        </div>
+      </section>
+
+      <!-- CASE: REPORTS -->
+      <section class="page page-case" id="page-reports">
+        <div class="breadcrumb">
+          <button class="link" data-cmd="work">../work</button>
+          <span class="dim">/</span>
+          <span>onehq-reports.case</span>
+        </div>
+
+        <h1 class="case-title">Report Builder</h1>
+
+        <div class="case-meta">
+          <div class="kv"><span class="dim">client ......</span><span>OneHQ</span></div>
+          <div class="kv"><span class="dim">role ........</span><span>Product Designer (IC)</span></div>
+          <div class="kv"><span class="dim">team ........</span><span>2 Engineers · 1 Designer</span></div>
+          <div class="kv"><span class="dim">duration ....</span><span>8 months</span></div>
+          <div class="kv"><span class="dim">surface .....</span><span>Web-based report composition tool</span></div>
+        </div>
+
+        <div class="case-tldr">
+          <span class="case-tldr-label">tl;dr</span>
+          Replaced a manual slides-and-exports process with a canvas that composes live-data reports. Monthly report prep dropped from 4h 28m to 22 minutes. The support category for "wrong carrier name" closed entirely.
+        </div>
+
+        <figure class="case-img hero">
+          <figcaption>./reports/hero.png</figcaption>
+          <img src="https://framerusercontent.com/images/rZBwUr0VNERoM9yCVx2CoFscRnc.png?width=4380&amp;height=2970" alt="Report Builder hero screen" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># the backstory</h2>
+        <p>
+          Every month, account managers pulled data out of the product, pasted it into slides, branded it, and emailed it to clients. Every month, something broke. Someone spelled Travelers as Traveler's. A KPI was from the wrong date range. A logo was outdated.
+        </p>
+        <p>
+          A previous team had shipped a form-based export tool. Nobody used it. Opening it was the running joke on the account team.
+        </p>
+
+        <div class="case-quote">
+          "I know the numbers are right when I send it. I just don't know they'll still be right next week."
+          <span class="attr">M., senior account manager</span>
+        </div>
+
+        <h2 class="case-h2"># what I did before designing anything</h2>
+        <ol class="case-list numbered">
+          <li>Read 180 support tickets tagged "reporting."</li>
+          <li>Sat with four account managers through a full monthly cycle (two weeks each).</li>
+          <li>Pulled 12 real reports that had gone to clients and diffed them against the source data.</li>
+        </ol>
+        <p>
+          Three of twelve had numbers that didn't match our own database. Not because anyone was careless. The copy-paste window was just too wide.
+        </p>
+
+        <h2 class="case-h2"># the bet: a canvas, not a form</h2>
+        <p>
+          The form-based version failed because forms force you to think in fields. Reporting is visual. You need to see the thing you're making.
+        </p>
+        <p>
+          We chose a three-panel canvas: section hierarchy on the left, live canvas in the middle, block settings on the right. Add a section. Drop in a chart block. Bind it to a query. Done.
+        </p>
+
+<div class="diagram">┌──────────┬─────────────────────────────────┬──────────┐
+│          │                                 │          │
+│ sections │   <span class="em">canvas</span>                        │ settings │
+│          │                                 │          │
+│  ▸ over  │   ┌─────────────┐ ┌──────────┐  │  block   │
+│  ▸ prem  │   │ <span class="em">KPI · loss%</span> │ │ <span class="em">chart</span>    │  │   type ▾ │
+│  ▸ clms  │   └─────────────┘ └──────────┘  │   color ▾│
+│  ▸ renew │   ┌────────────────────────────┐│   group ▾│
+│  ▸ notes │   │ <span class="em">table · top 10 carriers</span>    ││          │
+│          │   └────────────────────────────┘│          │
+│          │                                 │          │
+├──────────┴─────────────────────────────────┴──────────┤
+│  <span class="hl">as-of · 2024-03-31</span>     [ preview ]   [ schedule → ] │
+└───────────────────────────────────────────────────────┘</div>
+
+        <figure class="case-img">
+          <figcaption>./reports/canvas.png</figcaption>
+          <img src="https://framerusercontent.com/images/BAiki7O0o1YS3PMSDxtbXEXjoI.png?width=3900&amp;height=4737" alt="Report canvas with sections, blocks, and settings panel" loading="lazy" />
+        </figure>
+
+        <p>
+          The risk was that canvases invite Figma-level expectations. We scoped it hard: five section types, seven block types, no freeform positioning. If you wanted a custom layout, the answer was no. That was an unpopular stance and it held.
+        </p>
+
+        <h2 class="case-h2"># versioning (the actually hard part)</h2>
+        <p>
+          I thought versioning would be a footer with a date. It took eight weeks.
+        </p>
+        <p>
+          The problem: a client asks in April for "the one from February." If we re-render live, the numbers have changed. Monthly premium went up. Three claims closed. It's not the same report. If we freeze it, we need a real versioning model with an immutable snapshot.
+        </p>
+        <p>
+          We built freeze dates. Pressing send creates a snapshot with the as-of date in the header and footer. A publishing-history timeline shows every version ever sent, who sent it, when, with a thumbnail. Any version can be previewed, re-sent, or forked into a new draft.
+        </p>
+        <p>
+          This is the feature that won the team over. Reports stopped being files in someone's inbox and started being records in the product.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./reports/publishing-history.png</figcaption>
+          <img src="https://framerusercontent.com/images/PRGal4tanGLxG6ab39hrn9tMg.png?width=3900&amp;height=3561" alt="Publishing history with thumbnail timeline of versions" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># scheduling (almost got cut)</h2>
+        <p>
+          Scheduling kept almost getting cut. Engineering flagged risk three times. The PM pushed back twice.
+        </p>
+        <p>
+          I pushed for it because of one observation. The actual bottleneck on reporting wasn't writing the report. It was remembering to send it. 38% of delayed-report support tickets were "I forgot to send it on Friday."
+        </p>
+        <p>
+          It shipped. Recurring weekly and monthly, timezone aware, natural-language summary ("every first Monday at 9am ET"), one-click pause, next-send preview. Within three months, scheduling accounted for 72% of all sends.
+        </p>
+
+        <h2 class="case-h2"># in-place chart editing</h2>
+        <p>
+          Small one, worth mentioning. Charts are editable directly on the canvas, not in a separate modal. Change the type, color, grouping, date range, live.
+        </p>
+        <p>
+          We built this because our earliest prototype had an "edit chart" modal and testing showed users opening it, closing it, opening it, closing it, just to double-check what the chart looked like against the rest of the page.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./reports/in-place-viz.png</figcaption>
+          <img src="https://framerusercontent.com/images/zcLEqpm1YVTrLYOhVl81beL6rj4.png?width=3900&amp;height=3753" alt="In-place chart editing on the canvas" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># numbers, 6 months post-launch</h2>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">monthly report prep time (median)</span>
+            <span class="case-metric-value"><span class="was">4h 28m</span><span class="arrow">›</span><span class="now">22m</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">label-mismatch tickets / month</span>
+            <span class="case-metric-value"><span class="was">14</span><span class="arrow">›</span><span class="now">0</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">template reuse</span>
+            <span class="case-metric-value"><span class="now">63% of active users</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">scheduling adoption</span>
+            <span class="case-metric-value"><span class="now">41% of users, 72% of sends</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">monthly active in tool</span>
+            <span class="case-metric-value"><span class="now">94% of account managers</span></span>
+          </div>
+        </div>
+
+        <h2 class="case-h2"># what I'd do differently</h2>
+        <p>
+          I over-engineered the block types. We shipped seven. Users live inside three of them (KPI, table, chart). The other four are dead weight maintained at cost. Next time I'd ship three, wait six months, add based on what users actually ask for.
+        </p>
+        <p>
+          Publishing history is fine, but it should have been reachable from outside the builder. You still have to open a report to see its history. A portfolio-level "all reports ever sent" view is the first thing users ask for, and it's still on the backlog.
+        </p>
+
+        <h2 class="case-h2"># credit</h2>
+        <p class="dim small">
+          Shipped with 1 PM and 2 engineers (L and M). The block model and canvas interactions were my design. The immutability model for freeze dates was a joint design with L, who implemented the snapshot guarantees. The report anatomy became a template other teams now reuse.
+        </p>
+
+        <div class="case-foot">
+          // onehq-reports.case · end of file · type <span class="kbd">work</span> to go back.
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="page" id="page-about">
+        <div class="page-head">
+          <span class="dim">$ cat /etc/whoami</span>
+        </div>
+
+        <h1 class="page-title">whoami</h1>
+
+        <p class="lede">
+          I'm Ricardo. I design product &amp; UX for software where the details actually matter:
+          dense interfaces, complex flows, real users with real deadlines.
+        </p>
+
+        <p>
+          Four years at <span class="hl">OneHQ</span> shipping the surfaces customer teams live
+          inside every day. Before that, freelance UI work and a long detour through visual design.
+          I care about reducing friction without hiding complexity, and I think most "redesigns"
+          are actually research problems in disguise.
+        </p>
+
+        <h2 class="case-h2"># currently</h2>
+        <div class="kv-block">
+          <div class="kv"><span class="dim">based .......</span><span>Sondrio, Italy</span></div>
+          <div class="kv"><span class="dim">at ..........</span><span>OneHQ · 5y</span></div>
+          <div class="kv"><span class="dim">reading .....</span><span>"Patas Para Arriba" by Eduardo Galeano</span></div>
+          <div class="kv"><span class="dim">listening ...</span><span>too much ambient</span></div>
+        </div>
+
+        <h2 class="case-h2"># stack</h2>
+        <div class="kv-block">
+          <div class="kv"><span class="dim">design ......</span><span>Figma · Figma AI · design systems · prototyping · motion</span></div>
+          <div class="kv"><span class="dim">research ....</span><span>interviews · usability · synthesis · Perplexity</span></div>
+          <div class="kv"><span class="dim">building ....</span><span>HTML/CSS/TS · light React · v0 · bolt.new</span></div>
+          <div class="kv"><span class="dim">ai tooling ..</span><span>Claude Code · Cursor · MCP · agents · skills · hooks</span></div>
+        </div>
+
+        <p class="dim small">
+          // I build most prototypes now with agents in the loop. Faster iteration, more refined output. Designers who don't touch the pipe are about to fall behind.
+        </p>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="page" id="page-contact">
+        <div class="page-head">
+          <span class="dim">$ cat /etc/contact</span>
+        </div>
+
+        <h1 class="page-title">say hi</h1>
+
+        <p class="lede">
+          I'm taking on selected work and chats. The fastest way in is the schedule link below.
+        </p>
+
+        <div class="kv-block">
+          <div class="kv">
+            <span class="dim">schedule ....</span>
+            <a href="https://calendar.notion.so/meet/ricardodossantos/quick-talk" target="_blank" class="link">calendar.notion.so/meet/ricardodossantos <span class="dim">↗</span></a>
+          </div>
+          <div class="kv">
+            <span class="dim">linkedin ....</span>
+            <a href="https://www.linkedin.com/in/dsmartinucci/" target="_blank" class="link">linkedin.com/in/dsmartinucci <span class="dim">↗</span></a>
+          </div>
+          <div class="kv">
+            <span class="dim">dribbble ....</span>
+            <a href="https://dribbble.com/dsmartinucci" target="_blank" class="link">dribbble.com/dsmartinucci <span class="dim">↗</span></a>
+          </div>
+        </div>
+
+        <p class="dim small">
+          // tip: type <span class="kbd">schedule</span> to jump straight to the call link.
+        </p>
+      </section>
+
+      <!-- HELP -->
+      <section class="page" id="page-help">
+        <div class="page-head">
+          <span class="dim">$ help</span>
+        </div>
+
+        <h1 class="page-title">commands</h1>
+
+        <div class="help-grid">
+          <div class="help-row"><span class="help-cmd">home</span><span class="dim">go to /</span></div>
+          <div class="help-row"><span class="help-cmd">work</span><span class="dim">list projects</span></div>
+          <div class="help-row"><span class="help-cmd">about</span><span class="dim">whoami</span></div>
+          <div class="help-row"><span class="help-cmd">contact</span><span class="dim">how to reach me</span></div>
+          <div class="help-row"><span class="help-cmd">ls</span><span class="dim">list current dir</span></div>
+          <div class="help-row"><span class="help-cmd">cat &lt;name&gt;</span><span class="dim">open a case file</span></div>
+          <div class="help-row"><span class="help-cmd">whoami</span><span class="dim">quick id</span></div>
+          <div class="help-row"><span class="help-cmd">schedule</span><span class="dim">open call link</span></div>
+          <div class="help-row"><span class="help-cmd">stack</span><span class="dim">tools I actually use</span></div>
+          <div class="help-row"><span class="help-cmd">/mcp</span><span class="dim">connected servers</span></div>
+          <div class="help-row"><span class="help-cmd">/agents</span><span class="dim">agent ops</span></div>
+          <div class="help-row"><span class="help-cmd">theme</span><span class="dim">toggle accent</span></div>
+          <div class="help-row"><span class="help-cmd">date</span><span class="dim">print local time</span></div>
+          <div class="help-row"><span class="help-cmd">clear</span><span class="dim">clear response (Ctrl+L)</span></div>
+          <div class="help-row"><span class="help-cmd">↑ / ↓</span><span class="dim">history · Tab autocompletes</span></div>
+          <div class="help-row"><span class="help-cmd">?</span><span class="dim">there's an easter egg</span></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Command response area -->
+    <div class="cmd-response" id="cmdResponse" hidden></div>
+
+    <!-- Command input -->
+    <div class="cmd-line" id="cmdLine">
+      <span class="cmd-prompt">
+        <span class="prompt-arrow">&gt;</span>
+        <span class="prompt-path" id="promptPath">~</span>
+      </span>
+      <div class="cmd-input-wrap">
+        <span class="cmd-mirror" id="cmdMirror"></span><span class="cmd-cursor" id="cmdCursor"></span>
+        <span class="cmd-hint" id="cmdHint">type 'help' or pick below</span>
+        <input
+          id="cmdInput"
+          type="text"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-label="command input"
+        />
+      </div>
+    </div>
+
+    <!-- Quick nav -->
+    <nav class="quick-nav">
+      <button class="cmd-chip" data-cmd="home">home</button>
+      <button class="cmd-chip" data-cmd="work">work</button>
+      <button class="cmd-chip" data-cmd="about">about</button>
+      <button class="cmd-chip" data-cmd="contact">contact</button>
+      <button class="cmd-chip" data-cmd="help">help</button>
+    </nav>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
