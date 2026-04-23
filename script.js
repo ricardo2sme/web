@@ -47,7 +47,7 @@ const BOOT_LINES = [
   { t: '✻ rds-os v1.0  ·  starting session',                    c: 'claude' },
   { t: '',                                                       c: 'dim'    },
   { t: '  loading /work ..................... [ OK ]',           c: 'ok'     },
-  { t: '  loading /bresaola .................. [ OK ]',           c: 'ok'     },
+  { t: '  loading /brisaola .................. [ OK ]',           c: 'ok'     },
   { t: '  starting ux-daemon ................ [ OK ]',           c: 'ok'     },
   { t: '  syncing design-system ............. [ OK ]',           c: 'ok'     },
   { t: '  auth: yo@ricardo2s.me .............. [ OK ]',           c: 'ok'     },
