@@ -395,12 +395,12 @@ button {
    ============================================= */
 .ascii {
   font-family: var(--font-mono);
-  font-size: clamp(12px, 2.4vw, 22px);
-  line-height: 1.05;
+  font-size: clamp(8px, 1.4vw, 13px);
+  line-height: 1.1;
   color: var(--accent);
   margin-bottom: 28px;
   white-space: pre;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
 }
 
 /* =============================================
@@ -1167,7 +1167,7 @@ button {
   }
 
   .ascii {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .help-grid {
@@ -1213,7 +1213,7 @@ button {
 
 @media (max-width: 480px) {
   .ascii {
-    font-size: 7px;
+    font-size: 6px;
   }
 
   .welcome-head {
