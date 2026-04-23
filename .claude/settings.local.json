@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebFetch(domain:ricardo2s.me)",
+      "WebFetch(domain:www.linkedin.com)",
+      "WebFetch(domain:dribbble.com)",
+      "WebFetch(domain:www.zui.ooo)",
+      "Bash(curl -s -o /dev/null -w \"html:%{http_code} \" http://localhost:3456/)",
+      "Bash(curl -s -o /dev/null -w \"css:%{http_code} \" http://localhost:3456/style.css)",
+      "Bash(curl -s -o /dev/null -w \"js:%{http_code}\\\\n\" http://localhost:3456/script.js)",
+      "Bash(curl -s http://localhost:3456/style.css)",
+      "Bash(curl -s -o /dev/null -w \"html:%{http_code} css:%{http_code}\\\\n\" http://localhost:3456/ -w \"html:%{http_code} \")",
+      "Bash(curl -s -o /dev/null -w \"css:%{http_code} js:\" http://localhost:3456/style.css)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3456/script.js)",
+      "Bash(curl -s http://localhost:3456/)",
+      "Bash(curl -s https://ricardo2s.me/projects/com-prod)",
+      "Bash(curl -s https://ricardo2s.me/projects/report-builder)",
+      "Bash(curl -s -o /dev/null -w \"html:%{http_code} css:%{http_code} js:\" http://localhost:3456/)",
+      "Bash(curl -s -o /dev/null -w \"html:%{http_code} css:%{http_code}\\\\n\" http://localhost:3456/ http://localhost:3456/style.css)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(gh auth *)",
+      "Bash(ssh -T git@github.com)",
+      "Bash(ssh-keyscan github.com)",
+      "Bash(ssh-keygen -t ed25519 -C \"yo@ricardo2s.me\" -f ~/.ssh/id_ed25519 -N \"\")"
+    ]
+  }
+}
