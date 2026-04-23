@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- scanline pattern -->
+    <pattern id="scan" width="1" height="3" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="rgba(0,0,0,0.18)" y="2"/>
+    </pattern>
+    <!-- vignette -->
+    <radialGradient id="vig" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="transparent"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.55)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- bg -->
+  <rect width="1200" height="630" fill="#171719"/>
+
+  <!-- subtle grid lines -->
+  <rect width="1200" height="630" fill="url(#scan)" opacity="0.6"/>
+  <rect width="1200" height="630" fill="url(#vig)"/>
+
+  <!-- border frame -->
+  <rect x="32" y="32" width="1136" height="566" rx="12"
+        fill="none" stroke="#2c2c2e" stroke-width="1"/>
+
+  <!-- top bar -->
+  <rect x="32" y="32" width="1136" height="52" rx="12" fill="#1e1e20"/>
+  <rect x="32" y="68" width="1136" height="16" fill="#1e1e20"/><!-- bottom overlap fix -->
+  <line x1="32" y1="84" x2="1168" y2="84" stroke="#2c2c2e" stroke-width="1"/>
+
+  <!-- window dots -->
+  <circle cx="66"  cy="58" r="7" fill="#3a3a3c"/>
+  <circle cx="90"  cy="58" r="7" fill="#3a3a3c"/>
+  <circle cx="114" cy="58" r="7" fill="#3a3a3c"/>
+
+  <!-- path in top bar -->
+  <text x="600" y="63" text-anchor="middle"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="13"
+        fill="#6e6e6a">@ricardo2s.me : ~</text>
+
+  <!-- status dot + AVAILABLE -->
+  <circle cx="1098" cy="58" r="4.5" fill="#62c775"/>
+  <text x="1110" y="63"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="12"
+        fill="#62c775">AVAILABLE</text>
+
+  <!-- ASCII art – big block RDS -->
+  <text x="72" y="172"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="20"
+        fill="#5c8fd1" letter-spacing="0" xml:space="preserve">██████╗ ██████╗ ███████╗</text>
+  <text x="72" y="196"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="20"
+        fill="#5c8fd1" letter-spacing="0" xml:space="preserve">██╔══██╗██╔══██╗██╔════╝</text>
+  <text x="72" y="220"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="20"
+        fill="#5c8fd1" letter-spacing="0" xml:space="preserve">██████╔╝██║  ██║███████╗</text>
+  <text x="72" y="244"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="20"
+        fill="#5c8fd1" letter-spacing="0" xml:space="preserve">██╔══██╗██║  ██║╚════██║</text>
+  <text x="72" y="268"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="20"
+        fill="#5c8fd1" letter-spacing="0" xml:space="preserve">██║  ██║██████╔╝███████║</text>
+  <text x="72" y="292"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="20"
+        fill="#5c8fd1" letter-spacing="0" xml:space="preserve">╚═╝  ╚═╝╚═════╝╚══════╝</text>
+
+  <!-- divider -->
+  <line x1="72" y1="322" x2="680" y2="322" stroke="#2c2c2e" stroke-width="1"/>
+
+  <!-- name + role -->
+  <text x="72" y="365"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="32"
+        font-weight="600" fill="#e4e4e0">Ricardo Dos Santos</text>
+  <text x="72" y="400"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="17"
+        fill="#9a9a94">Product &amp; UX Designer · Sondrio, IT</text>
+
+  <!-- kv block -->
+  <text x="72" y="447"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#6e6e6a">role .........</text>
+  <text x="244" y="447"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#e4e4e0">OneHQ (5 years)</text>
+
+  <text x="72" y="470"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#6e6e6a">focus ........</text>
+  <text x="244" y="470"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#e4e4e0">complex workflows · dense UI · design systems</text>
+
+  <text x="72" y="493"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#6e6e6a">status .......</text>
+  <text x="244" y="493"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#5c8fd1">open to new work</text>
+
+  <!-- prompt line at bottom -->
+  <text x="72" y="558"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#5c8fd1">&gt;</text>
+  <text x="94" y="558"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
+        fill="#6e6e6a">ricardo2s.me</text>
+
+  <!-- right side tag -->
+  <text x="1128" y="558" text-anchor="end"
+        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="13"
+        fill="#3a3a3c">portfolio · 2025</text>
+</svg>
