@@ -113,7 +113,7 @@ const COMMANDS = {
 
   // navigation
   home:    () => { navigate('home');    return null; },
-  work:    () => { navigate('work');    return null; },
+  work:    () => ({ err: 'work/ is temporarily offline. check back soon.' }),
   about:   () => { navigate('about');   return null; },
   contact: () => { navigate('contact'); return null; },
   help:    () => { navigate('help');    return null; },
@@ -121,12 +121,7 @@ const COMMANDS = {
   // open case file
   cat: (name) => {
     if (!name) return { err: 'usage: cat <file>. try `cat onehq-comhub`' };
-    const key = name.replace(/\.case$/, '').toLowerCase();
-    if (PAGES[key] && key.startsWith('onehq-')) {
-      navigate(key);
-      return null;
-    }
-    return { err: `cat: ${name}: no such file. type 'work' to list.` };
+    return { err: 'work/ is temporarily offline. check back soon.' };
   },
 
   // listing
