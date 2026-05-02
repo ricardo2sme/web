@@ -152,6 +152,11 @@ function navigate(pageKey) {
   state.current = pageKey;
   els.output.scrollTop = 0;
   setActiveNav(pageKey);
+
+  // clear any panic / response output on navigation
+  els.cmdResponse.innerHTML = '';
+  els.cmdResponse.hidden = true;
+
   return true;
 }
 
