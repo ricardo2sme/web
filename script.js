@@ -88,51 +88,124 @@ function finishBoot() {
    KERNEL PANIC
    ============================================= */
 function kernelPanic() {
-  // shake + flash the terminal
   const term = els.terminal;
-  term.classList.add('is-panicking');
-  setTimeout(() => term.classList.remove('is-panicking'), 600);
+  const GLITCH = '░▒▓█▄▀■□▪▫◆●○⊕⊗▮▯⚡✖⚠';
 
-  // scanline sweep overlay
+  /* ---- scramble + resolve effect ---- */
+  function scramble(el, final, duration) {
+    let frame = 0;
+    const frames = 10;
+    const iv = duration / frames;
+    (function tick() {
+      if (frame >= frames) { el.textContent = final; return; }
+      const p = frame / frames;
+      el.textContent = final.split('').map(c =>
+        c === ' ' ? ' ' : Math.random() < p ? c : GLITCH[Math.floor(Math.random() * GLITCH.length)]
+      ).join('');
+      frame++;
+      setTimeout(tick, iv);
+    })();
+  }
+
+  /* ---- glitch header path briefly ---- */
+  const origPath = els.sysPath.textContent;
+  let hframe = 0;
+  const hiv = setInterval(() => {
+    els.sysPath.textContent = origPath.split('').map(c =>
+      Math.random() < 0.4 ? GLITCH[Math.floor(Math.random() * GLITCH.length)] : c
+    ).join('');
+    if (++hframe > 6) { clearInterval(hiv); els.sysPath.textContent = origPath; }
+  }, 60);
+
+  /* ---- shake + flash the terminal ---- */
+  term.classList.add('is-panicking');
+  setTimeout(() => term.classList.remove('is-panicking'), 900);
+
+  /* ---- multi-scanline overlay ---- */
   const overlay = document.createElement('div');
   overlay.className = 'panic-overlay';
-  const scanline = document.createElement('div');
-  scanline.className = 'panic-scanline';
-  overlay.appendChild(scanline);
+
+  const flash = document.createElement('div');
+  flash.className = 'panic-flash-layer';
+  overlay.appendChild(flash);
+
+  [[0.3, 0], [0.45, 120], [0.25, 220]].forEach(([dur, delay]) => {
+    setTimeout(() => {
+      const sl = document.createElement('div');
+      sl.className = 'panic-scanline';
+      sl.style.animationDuration = `${dur}s`;
+      overlay.appendChild(sl);
+      setTimeout(() => sl.remove(), dur * 1000 + 50);
+    }, delay);
+  });
+
   document.body.appendChild(overlay);
-  setTimeout(() => overlay.remove(), 450);
+  setTimeout(() => overlay.remove(), 800);
+
+  /* ---- fake hex dump lines ---- */
+  function hexLine() {
+    const addr = (Math.random() * 0xfffff | 0).toString(16).padStart(8,'0');
+    const bytes = Array.from({length:8}, () =>
+      (Math.random()*0xff|0).toString(16).padStart(2,'0')).join(' ');
+    return `0xffff${addr}: ${bytes}  ??`;
+  }
 
   const LINES = [
-    { t: 'BUG: unable to handle kernel NULL pointer dereference', cls: 'panic-line' },
-    { t: '     at navigate_work+0x00/0xff [rds-os]',              cls: 'panic-line dim' },
-    { t: 'RIP: 0010:open_case_files+0x42/0x80',                   cls: 'panic-line dim' },
-    { t: 'Call Trace:',                                            cls: 'panic-line dim' },
-    { t: '  <TASK> execute_command+0x1f/0x40',                    cls: 'panic-line dim' },
-    { t: '  <TASK> handle_portfolio_request+0x8/0x10',            cls: 'panic-line dim' },
-    { t: '!! SEGFAULT — /work: permission denied !!',             cls: 'panic-line' },
-    { t: '',                                                       cls: '' },
-    { t: 'ACCESS DENIED',                                         cls: 'panic-banner' },
-    { t: '// case files are being updated. check back soon.',     cls: 'panic-note' },
+    { t: 'KERNEL PANIC — not syncing',                            cls: 'panic-line' },
+    { t: '/work/case-files: segmentation fault (core dumped)',    cls: 'panic-line' },
+    { t: '',                                                      cls: '' },
+    { t: hexLine(),                                               cls: 'panic-line hex' },
+    { t: hexLine(),                                               cls: 'panic-line hex' },
+    { t: hexLine(),                                               cls: 'panic-line hex' },
+    { t: '',                                                      cls: '' },
+    { t: 'CPU: 0 PID: 1337  Comm: rds-os  Tainted: P',           cls: 'panic-line dim' },
+    { t: 'RIP: 0010:navigate_work+0x00/0xff  [rds-os]',          cls: 'panic-line dim' },
+    { t: 'RSP: 0000:ffffc900  EFLAGS: 00010246',                  cls: 'panic-line dim' },
+    { t: 'Call Trace:',                                           cls: 'panic-line dim' },
+    { t: '  <TASK>  open_case_files+0x42/0x80',                  cls: 'panic-line dim' },
+    { t: '  <TASK>  execute_command+0x1f/0x40',                  cls: 'panic-line dim' },
+    { t: '  <TASK>  handle_portfolio_request+0x8/0x10',          cls: 'panic-line dim' },
+    { t: '',                                                      cls: '' },
+    { t: '!! PERMISSION DENIED  —  /work is classified !!',      cls: 'panic-line' },
+    { t: '!! HALTING EXECUTION !!',                              cls: 'panic-line' },
+    { t: '',                                                      cls: '' },
+    { t: '__BANNER__',                                           cls: '__banner__' },
+    { t: '// case files loading. check back soon.',              cls: 'panic-note' },
   ];
 
-  let delay = 80;
-  LINES.forEach((line, i) => {
+  let delay = 60;
+  LINES.forEach(line => {
     setTimeout(() => {
-      const div = document.createElement('div');
-      div.className = `result-line ${line.cls}`;
-      if (line.cls === 'panic-banner') {
-        const span = document.createElement('span');
-        span.className = 'panic-banner';
-        span.textContent = line.t;
-        div.appendChild(span);
+      if (line.cls === '__banner__') {
+        const div = document.createElement('div');
+        div.className = 'result-line';
+        const wrap = document.createElement('span');
+        wrap.className = 'panic-banner-wrap';
+
+        const ghost = document.createElement('span');
+        ghost.className = 'panic-banner-ghost';
+        ghost.textContent = 'ACCESS DENIED';
+
+        const banner = document.createElement('span');
+        banner.className = 'panic-banner';
+        banner.textContent = '▓▒░▓▒░▓▒░▓▒░▒';
+
+        wrap.appendChild(ghost);
+        wrap.appendChild(banner);
+        div.appendChild(wrap);
+        els.cmdResponse.appendChild(div);
+        els.cmdResponse.hidden = false;
+        scramble(banner, 'ACCESS DENIED', 500);
       } else {
+        const div = document.createElement('div');
+        div.className = `result-line ${line.cls}`;
         div.textContent = line.t;
+        els.cmdResponse.appendChild(div);
+        els.cmdResponse.hidden = false;
       }
-      els.cmdResponse.appendChild(div);
-      els.cmdResponse.hidden = false;
       scrollResponse();
     }, delay);
-    delay += line.t ? 55 + Math.random() * 40 : 20;
+    delay += line.t ? 42 + Math.random() * 30 : 18;
   });
 }
 
