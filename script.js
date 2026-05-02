@@ -85,6 +85,58 @@ function finishBoot() {
 }
 
 /* =============================================
+   KERNEL PANIC
+   ============================================= */
+function kernelPanic() {
+  // shake + flash the terminal
+  const term = els.terminal;
+  term.classList.add('is-panicking');
+  setTimeout(() => term.classList.remove('is-panicking'), 600);
+
+  // scanline sweep overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'panic-overlay';
+  const scanline = document.createElement('div');
+  scanline.className = 'panic-scanline';
+  overlay.appendChild(scanline);
+  document.body.appendChild(overlay);
+  setTimeout(() => overlay.remove(), 450);
+
+  const LINES = [
+    { t: 'BUG: unable to handle kernel NULL pointer dereference', cls: 'panic-line' },
+    { t: '     at navigate_work+0x00/0xff [rds-os]',              cls: 'panic-line dim' },
+    { t: 'RIP: 0010:open_case_files+0x42/0x80',                   cls: 'panic-line dim' },
+    { t: 'Call Trace:',                                            cls: 'panic-line dim' },
+    { t: '  <TASK> execute_command+0x1f/0x40',                    cls: 'panic-line dim' },
+    { t: '  <TASK> handle_portfolio_request+0x8/0x10',            cls: 'panic-line dim' },
+    { t: '!! SEGFAULT — /work: permission denied !!',             cls: 'panic-line' },
+    { t: '',                                                       cls: '' },
+    { t: 'ACCESS DENIED',                                         cls: 'panic-banner' },
+    { t: '// case files are being updated. check back soon.',     cls: 'panic-note' },
+  ];
+
+  let delay = 80;
+  LINES.forEach((line, i) => {
+    setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = `result-line ${line.cls}`;
+      if (line.cls === 'panic-banner') {
+        const span = document.createElement('span');
+        span.className = 'panic-banner';
+        span.textContent = line.t;
+        div.appendChild(span);
+      } else {
+        div.textContent = line.t;
+      }
+      els.cmdResponse.appendChild(div);
+      els.cmdResponse.hidden = false;
+      scrollResponse();
+    }, delay);
+    delay += line.t ? 55 + Math.random() * 40 : 20;
+  });
+}
+
+/* =============================================
    COMMAND ROUTER
    ============================================= */
 function navigate(pageKey) {
@@ -113,7 +165,7 @@ const COMMANDS = {
 
   // navigation
   home:    () => { navigate('home');    return null; },
-  work:    () => ({ err: 'work/ is temporarily offline. check back soon.' }),
+  work:    () => { kernelPanic();       return null; },
   about:   () => { navigate('about');   return null; },
   contact: () => { navigate('contact'); return null; },
   help:    () => { navigate('help');    return null; },
@@ -121,7 +173,8 @@ const COMMANDS = {
   // open case file
   cat: (name) => {
     if (!name) return { err: 'usage: cat <file>. try `cat onehq-comhub`' };
-    return { err: 'work/ is temporarily offline. check back soon.' };
+    kernelPanic();
+    return null;
   },
 
   // listing
