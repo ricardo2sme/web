@@ -90,36 +90,6 @@ button {
   background: var(--dim);
 }
 
-/* =============================================
-   CRT EFFECTS
-   ============================================= */
-.scanlines {
-  position: fixed;
-  inset: 0;
-  z-index: 9000;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 3px,
-    rgba(0, 0, 0, 0.10) 3px,
-    rgba(0, 0, 0, 0.10) 4px
-  );
-  opacity: 0.25;
-  mix-blend-mode: multiply;
-}
-
-.vignette {
-  position: fixed;
-  inset: 0;
-  z-index: 8999;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 60%,
-    rgba(0, 0, 0, 0.35) 100%
-  );
-}
 
 /* =============================================
    BOOT SCREEN
