@@ -663,6 +663,30 @@ button {
   background: rgba(0, 0, 0, 0.25);
   display: block;
   max-width: 100%;
+  position: relative;
+}
+
+/* CRT overlay: scanlines + vignette on every case screenshot */
+.case-img::after {
+  content: '';
+  position: absolute;
+  inset: 10px;          /* match padding so it sits on the img, not the frame */
+  pointer-events: none;
+  z-index: 2;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 3px,
+      rgba(0, 0, 0, 0.09) 3px,
+      rgba(0, 0, 0, 0.09) 4px
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 55%,
+      rgba(0, 0, 0, 0.38) 100%
+    );
+  mix-blend-mode: multiply;
 }
 
 .case-img figcaption {
@@ -686,13 +710,19 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  filter: saturate(0.92) contrast(1.02);
+  filter: saturate(0.88) contrast(1.05) brightness(0.97);
   transition: filter 0.3s;
   cursor: zoom-in;
 }
 
 .case-img img:hover {
-  filter: saturate(1.05) contrast(1.04);
+  filter: saturate(1.0) contrast(1.06) brightness(1.0);
+}
+
+.case-img img:hover ~ *,
+.case-img:hover::after {
+  opacity: 0.4;
+  transition: opacity 0.3s;
 }
 
 .case-img.hero {
