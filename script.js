@@ -35,7 +35,7 @@ const PAGES = {
 };
 
 /* ---- Preview / deep-link mode ----
-   Path-based (clean URLs via _redirects):
+   Path-based (clean URLs via 404.html → ?p= redirect):
      /work              → work list
      /cat/onehq-workflow → case study
    Query-param fallback (still supported):
@@ -44,10 +44,12 @@ const PAGES = {
      ?cat=X             → case study
 ---------------------------------------------------- */
 const _params   = new URLSearchParams(window.location.search);
-const _path     = window.location.pathname.replace(/^\//, '').split('/'); // ['work'] or ['cat','onehq-workflow']
-const _pathKey  = _path[0] === 'cat' ? _path[1]
-                : _path[0] === 'work' ? 'work'
-                : null;
+// ?p= is set by 404.html when GitHub Pages catches an unknown path
+const _pParam   = _params.get('p');
+const _pPath    = _pParam ? _pParam.replace(/^\//, '').split('/') : [];
+const _path     = window.location.pathname.replace(/^\//, '').split('/');
+const _keyFrom  = seg => (seg[0] === 'cat' ? seg[1] : seg[0] === 'work' ? 'work' : null);
+const _pathKey  = _keyFrom(_pPath) || _keyFrom(_path);
 const DEEPLINK  = _pathKey
                || (_params.has('work') ? 'work' : null)
                || (_params.has('cat')  ? _params.get('cat') : null);

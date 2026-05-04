@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>ricardo2s.me</title>
+  <script>
+    // GitHub Pages serves this for any unknown path.
+    // Encode the path as a query param and redirect to the root,
+    // where index.html will pick it up and navigate correctly.
+    var path = window.location.pathname + window.location.search;
+    window.location.replace('/?p=' + encodeURIComponent(path));
+  </script>
+</head>
+</html>
