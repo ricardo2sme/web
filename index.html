@@ -75,6 +75,7 @@
         <span class="sys-pair"><span class="dim">uptime</span> <span id="uptime">00:00:00</span></span>
         <span class="sys-sep">·</span>
         <span class="sys-status">
+          <!-- STATUS: change "AVAILABLE" to "UNAVAILABLE" and .status-dot color to var(--error) when not open to work -->
           <span class="status-dot"></span><span>AVAILABLE</span>
         </span>
       </div>
@@ -544,7 +545,7 @@
         </p>
 
         <div class="case-foot">
-          // onehq-reports.case · end of file · type <span class="kbd">cat onehq-workflow</span> for the next one.
+          // onehq-reports.case · end of file · type <span class="kbd">work</span> to go back.
         </div>
       </section>
 
@@ -641,12 +642,12 @@
 
         <figure class="case-img">
           <figcaption>./workflow/triggers.png</figcaption>
-          <img src="img/workflow-triggers.png" alt="Trigger selection sidebar with 8 trigger types and descriptions" loading="lazy" />
+          <img src="img/workflow-triggers.png" alt="Trigger selection sidebar with 9 trigger types and descriptions" loading="lazy" />
         </figure>
 
-        <h2 class="case-h2"># the trigger list (six weeks to define eight types)</h2>
+        <h2 class="case-h2"># the trigger list (six weeks to define nine types)</h2>
         <p>
-          We launched with eight triggers: Manual, On Schedule, On Field Change, On Email Received, On Chat Message, HTTP Request, On App Event, On Form Submission, Triggered by Another Workflow.
+          We launched with nine triggers: Manual, On Schedule, On Field Change, On Email Received, On Chat Message, HTTP Request, On App Event, On Form Submission, Triggered by Another Workflow.
         </p>
         <p>
           Getting there took six weeks and two rounds of user testing. "On Field Change" failed the language test. In early testing, 42% of users could explain what it would do from the label alone. We renamed it to "When a record is updated." In the second round, 89% got it right on first read. The naming was as much of a product decision as the feature itself.
@@ -757,7 +758,7 @@
         </p>
 
         <div class="case-foot">
-          // onehq-workflow.case · end of file · type <span class="kbd">work</span> to go back.
+          // onehq-workflow.case · end of file · type <span class="kbd">cat onehq-comhub</span> for the next one.
         </div>
       </section>
 
@@ -844,7 +845,7 @@
 
         <div class="help-grid">
           <div class="help-row"><span class="help-cmd">home</span><span class="dim">go to /</span></div>
-          <div class="help-row"><span class="help-cmd">work</span><span class="dim">list projects</span></div>
+          <div class="help-row"><span class="help-cmd">work</span><span class="dim">list projects · access restricted</span></div>
           <div class="help-row"><span class="help-cmd">about</span><span class="dim">whoami</span></div>
           <div class="help-row"><span class="help-cmd">contact</span><span class="dim">how to reach me</span></div>
           <div class="help-row"><span class="help-cmd">ls</span><span class="dim">list current dir</span></div>
