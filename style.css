@@ -653,7 +653,8 @@ button {
   opacity: 0.7;
 }
 
-.case-img img {
+.case-img img,
+.case-img video {
   display: block;
   width: auto;
   max-width: 100%;
@@ -665,6 +666,11 @@ button {
 
 .case-img img:hover {
   filter: brightness(1.03);
+}
+
+.case-img.case-video video {
+  width: 100%;
+  cursor: default;
 }
 
 .case-img.hero {

@@ -67,7 +67,9 @@
       "Bash(curl -s -o /Users/ricardo/Web/img/workflow-entry.png \"https://www.figma.com/api/mcp/asset/db60ba1e-2d6f-410f-a853-624182ff581d\")",
       "Bash(curl -s -o /Users/ricardo/Web/img/workflow-actions.png \"https://www.figma.com/api/mcp/asset/380187ab-c39a-40ff-b80b-83ced7e605e7\")",
       "Bash(curl -s -o /Users/ricardo/Web/img/workflow-schedule.png \"https://www.figma.com/api/mcp/asset/33336d0f-1fbc-4165-8ba8-49ccc3ce56dc\")",
-      "Bash(curl -s -o /Users/ricardo/Web/img/workflow-if.png \"https://www.figma.com/api/mcp/asset/b2137ff1-0962-4338-8dc9-31623b909f91\")"
+      "Bash(curl -s -o /Users/ricardo/Web/img/workflow-if.png \"https://www.figma.com/api/mcp/asset/b2137ff1-0962-4338-8dc9-31623b909f91\")",
+      "Bash(ffprobe -v quiet -print_format json -show_streams /Users/ricardo/Desktop/web.mp4)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(s['codec_type'], s.get\\('codec_name'\\), s.get\\('width',''\\), s.get\\('height',''\\), s.get\\('duration',''\\), 'fps:', s.get\\('r_frame_rate',''\\)\\) for s in d.get\\('streams',[]\\)]\")"
     ]
   }
 }

@@ -35,15 +35,23 @@ const PAGES = {
 };
 
 /* ---- Preview / deep-link mode ----
-   ?preview  → unlocks work section (stays on home)
-   ?work     → unlocks work section AND jumps straight to the work list
-   ?cat=X    → unlocks work section AND opens case study X (e.g. onehq-workflow)
+   Path-based (clean URLs via _redirects):
+     /work              → work list
+     /cat/onehq-workflow → case study
+   Query-param fallback (still supported):
+     ?preview           → unlocks work, stays on home
+     ?work              → work list
+     ?cat=X             → case study
 ---------------------------------------------------- */
-const _params  = new URLSearchParams(window.location.search);
-const PREVIEW  = _params.has('preview') || _params.has('work') || _params.has('cat');
-const DEEPLINK = _params.has('work') ? 'work'
-               : _params.has('cat')  ? _params.get('cat')
-               : null;
+const _params   = new URLSearchParams(window.location.search);
+const _path     = window.location.pathname.replace(/^\//, '').split('/'); // ['work'] or ['cat','onehq-workflow']
+const _pathKey  = _path[0] === 'cat' ? _path[1]
+                : _path[0] === 'work' ? 'work'
+                : null;
+const DEEPLINK  = _pathKey
+               || (_params.has('work') ? 'work' : null)
+               || (_params.has('cat')  ? _params.get('cat') : null);
+const PREVIEW   = !!DEEPLINK || _params.has('preview');
 
 /* ---- State ---- */
 const state = {
