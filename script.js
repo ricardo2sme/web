@@ -24,14 +24,18 @@ const els = {
 
 /* ---- Page registry ---- */
 const PAGES = {
-  home:           { id: 'page-home',     path: '~' },
-  work:           { id: 'page-work',     path: '~/work' },
-  about:          { id: 'page-about',    path: '~/about' },
-  contact:        { id: 'page-contact',  path: '~/contact' },
-  help:           { id: 'page-help',     path: '~/help' },
-  'onehq-comhub': { id: 'page-com-hub',  path: '~/work/onehq-comhub' },
-  'onehq-reports':{ id: 'page-reports',  path: '~/work/onehq-reports' },
+  home:              { id: 'page-home',         path: '~' },
+  work:              { id: 'page-work',          path: '~/work' },
+  about:             { id: 'page-about',         path: '~/about' },
+  contact:           { id: 'page-contact',       path: '~/contact' },
+  help:              { id: 'page-help',          path: '~/help' },
+  'onehq-comhub':    { id: 'page-com-hub',       path: '~/work/onehq-comhub' },
+  'onehq-reports':   { id: 'page-reports',       path: '~/work/onehq-reports' },
+  'onehq-workflow':  { id: 'page-workflow',      path: '~/work/onehq-workflow' },
 };
+
+/* ---- Preview mode: ?preview in URL unlocks work ---- */
+const PREVIEW = new URLSearchParams(window.location.search).has('preview');
 
 /* ---- State ---- */
 const state = {
@@ -243,7 +247,7 @@ const COMMANDS = {
 
   // navigation
   home:    () => { navigate('home');    return null; },
-  work:    () => { kernelPanic();       return null; },
+  work:    () => { if (PREVIEW) { navigate('work'); return null; } kernelPanic(); return null; },
   about:   () => { navigate('about');   return null; },
   contact: () => { navigate('contact'); return null; },
   help:    () => { navigate('help');    return null; },
@@ -251,8 +255,13 @@ const COMMANDS = {
   // open case file
   cat: (name) => {
     if (!name) return { err: 'usage: cat <file>. try `cat onehq-comhub`' };
-    kernelPanic();
-    return null;
+    if (!PREVIEW) { kernelPanic(); return null; }
+    const key = name.replace(/\.case$/, '').toLowerCase();
+    if (PAGES[key] && key.startsWith('onehq-')) {
+      navigate(key);
+      return null;
+    }
+    return { err: `cat: ${name}: no such file. type 'work' to list.` };
   },
 
   // listing
@@ -531,7 +540,7 @@ function bindFileRows() {
       // find page key that maps to this id
       const key = Object.keys(PAGES).find(k => PAGES[k].id === targetId);
       if (key) {
-        execute(key === 'onehq-comhub' || key === 'onehq-reports' ? `cat ${key}` : key);
+        execute(key.startsWith('onehq-') ? `cat ${key}` : key);
       }
     });
   });
@@ -589,6 +598,12 @@ function bindFocus() {
    ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
   startUptime();
+
+  // preview mode: show work chips hidden by default
+  if (PREVIEW) {
+    $$('[data-cmd="work"]').forEach(el => el.style.display = '');
+  }
+
   bindChips();
   bindFileRows();
   bindFocus();

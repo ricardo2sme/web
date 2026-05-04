@@ -158,6 +158,19 @@
             </div>
           </div>
 
+          <div class="file" data-target="page-workflow">
+            <div class="file-row">
+              <span class="file-perm">drwxr-xr-x</span>
+              <span class="file-size">2025</span>
+              <span class="file-name">onehq-workflow<span class="file-ext">.case</span></span>
+              <span class="file-meta-tag dim">Automation UX</span>
+              <button class="file-open" data-cmd="cat onehq-workflow">[ open ]</button>
+            </div>
+            <div class="file-desc">
+              <span class="dim">»</span> A node-based workflow builder for insurance ops. 847 automations in 90 days. Three Zapier accounts decommissioned.
+            </div>
+          </div>
+
           <div class="file file-locked">
             <div class="file-row">
               <span class="file-perm dim">----------</span>
@@ -171,7 +184,7 @@
         </div>
 
         <div class="page-foot dim">
-          2 entries shown · 1 hidden under NDA
+          3 entries shown · 1 hidden under NDA
         </div>
       </section>
 
@@ -531,7 +544,220 @@
         </p>
 
         <div class="case-foot">
-          // onehq-reports.case · end of file · type <span class="kbd">work</span> to go back.
+          // onehq-reports.case · end of file · type <span class="kbd">cat onehq-workflow</span> for the next one.
+        </div>
+      </section>
+
+      <!-- CASE: WORKFLOW AUTOMATION BUILDER -->
+      <section class="page page-case" id="page-workflow">
+        <div class="breadcrumb">
+          <button class="link" data-cmd="work">../work</button>
+          <span class="dim">/</span>
+          <span>onehq-workflow.case</span>
+        </div>
+
+        <h1 class="case-title">Workflow Automation Builder</h1>
+
+        <div class="case-meta">
+          <div class="kv"><span class="dim">client ......</span><span>OneHQ</span></div>
+          <div class="kv"><span class="dim">role ........</span><span>Product Designer (IC)</span></div>
+          <div class="kv"><span class="dim">team ........</span><span>1 PM · 3 Engineers · 1 Designer</span></div>
+          <div class="kv"><span class="dim">duration ....</span><span>4 months</span></div>
+          <div class="kv"><span class="dim">surface .....</span><span>Web app · enterprise CRM · insurance ops</span></div>
+        </div>
+
+        <div class="case-tldr">
+          <span class="case-tldr-label">tl;dr</span>
+          Built a node-based automation tool so insurance account managers could own their own workflows without touching engineering. 847 automations created in the first 90 days. The hard part wasn't the canvas. It was getting non-technical users past "trigger" and "conditional."
+        </div>
+
+        <figure class="case-img hero">
+          <figcaption>./workflow/entry.png</figcaption>
+          <img src="img/workflow-entry.png" alt="Workflow builder entry state: Custom Trigger, Start with Template, Start With AI" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># how this started</h2>
+        <p>
+          Every repetitive process the team ran lived in someone's head or someone's spreadsheet. Policy renewals due in 30 days: one account manager had a color-coded Excel file she ran every Monday. Claim status changes: copy-pasted into an email, manually. Inbound form submissions: forwarded to the right person, by memory.
+        </p>
+        <p>
+          Engineering had automated three things on request. All three were hardcoded and untouchable by anyone who wasn't a developer. One broke when the field it referenced got renamed. Nobody noticed for six weeks.
+        </p>
+
+        <div class="case-quote">
+          "I have a Zap for that. I just can't tell IT about it."
+          <span class="attr">D., account manager, 3 years at OneHQ</span>
+        </div>
+
+        <h2 class="case-h2"># what I mapped before opening Figma</h2>
+        <p>
+          I spent two weeks watching the team work. Not what they described in interviews. What they actually did.
+        </p>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">distinct recurring manual triggers logged</span>
+            <span class="case-metric-value">23</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">manual follow-up actions per person per day</span>
+            <span class="case-metric-value">11 (avg across 6 team members)</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">Zapier accounts running outside IT knowledge</span>
+            <span class="case-metric-value">3 · paid out of personal budgets</span>
+          </div>
+        </div>
+        <p>
+          The Zapier accounts were the signal. When people solve a problem outside the product with their own money, the product has failed them. They didn't need convincing. They needed something better.
+        </p>
+
+        <h2 class="case-h2"># the design bet: graph, not recipe</h2>
+        <p>
+          Recipe-style automation (when X, do Y) would have covered roughly 70% of the use cases. The other 30% required branching: if a client responds within 48 hours, do this; if not, do that. For an insurance CRM, that 30% holds most of the actual value. Renewals are conditional. Claims routing is conditional. Everything downstream of an inbound request is conditional.
+        </p>
+        <p>
+          We went with a visual node graph.
+        </p>
+
+<div class="diagram">┌──────────────────────────────────────┬─────────────────┐
+│  canvas                   [Run][Pub] │  Add a Node     │
+│                                      │                 │
+│  ┌──────────────────┐                │  Conditionals   │
+│  │ ◉ Email Received │                │  Pull Record    │
+│  └────────┬─────────┘                │  Send Email     │
+│           │                          │  Update Field   │
+│       ┌───▼───┐                      │  Schedule Mtg   │
+│  ╔════╡  If   ╞════╗                 │  Create Task    │
+│  ║    └───────┘    ║                 │  ...            │
+│  ▼False            ▼True             └─────────────────┘
+│  ┌──────────┐  ┌──────────────┐
+│  │ Follow-up│  │ Send Email   │
+│  └──────────┘  └──────────────┘
+└──────────────────────────────────────────────────────────┘</div>
+
+        <p>
+          The risk was complexity. These users were not developers. The mitigation was deliberate: nodes snap to a grid, edges draw themselves, the canvas boots with a single focused entry point before anything else is visible.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./workflow/triggers.png</figcaption>
+          <img src="img/workflow-triggers.png" alt="Trigger selection sidebar with 8 trigger types and descriptions" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># the trigger list (six weeks to define eight types)</h2>
+        <p>
+          We launched with eight triggers: Manual, On Schedule, On Field Change, On Email Received, On Chat Message, HTTP Request, On App Event, On Form Submission, Triggered by Another Workflow.
+        </p>
+        <p>
+          Getting there took six weeks and two rounds of user testing. "On Field Change" failed the language test. In early testing, 42% of users could explain what it would do from the label alone. We renamed it to "When a record is updated." Comprehension hit 89% in the second round. The naming was as much of a product decision as the feature itself.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./workflow/actions.png</figcaption>
+          <img src="img/workflow-actions.png" alt="Action node list: Conditionals, Pull Record Data, Create Follow-up, Update Record Field, Send Email and more" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># node config: always inline, never a modal</h2>
+        <p>
+          Each node opens its settings in a persistent right panel. Not a modal, never a modal. Account managers routinely need to reference other parts of the canvas while configuring a node. A modal blocks that view. A panel doesn't.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./workflow/schedule-config.png</figcaption>
+          <img src="img/workflow-schedule.png" alt="On Schedule trigger config: frequency, time of day, trigger on weekends toggle" loading="lazy" />
+        </figure>
+
+        <p>
+          Data mapping lets users pull values from upstream nodes into any text field via a "/" shortcut. It's the most powerful interaction in the product and the hardest to discover. We shipped a tooltip at launch. An interactive walkthrough would have been better.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./workflow/if-config.png</figcaption>
+          <img src="img/workflow-if.png" alt="IF conditional node config: field selector, condition, value, And/Or logic" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># what the IF node taught me about naming</h2>
+        <p>
+          The branch node ships as "If." In testing we called it "Conditional," "Branch," "Route," and "Filter." "If" was the only name that didn't need a sentence of explanation after it.
+        </p>
+        <p>
+          The True/False labels on the output connectors caused the most confusion of anything in the product. We tested "Yes/No," "Match/No match," "Pass/Fail." Nothing worked cleanly. True/False survived because it mapped to what users had already seen in Zapier and in spreadsheet formulas. Known vocabulary beats perfect vocabulary.
+        </p>
+
+        <figure class="case-img">
+          <figcaption>./workflow/canvas-merge.png</figcaption>
+          <img src="img/workflow-canvas.png" alt="Workflow canvas showing multi-input Merge node with Input 1 and Input 2 labeled connectors" loading="lazy" />
+        </figure>
+
+        <h2 class="case-h2"># what shipped, what got cut</h2>
+        <div class="shipcut">
+          <div class="shipcut-col shipped">
+            <h4>shipped</h4>
+            <ul>
+              <li>visual node canvas (drag, snap, auto-connect)</li>
+              <li>8 trigger types with inline config panels</li>
+              <li>9 action nodes (Send Email, Update Field, Follow-up, Create Task, and more)</li>
+              <li>If / Merge / Switch / Stop &amp; Error / Wait</li>
+              <li>data mapping via "/" shortcut</li>
+              <li>3-step wizard: Setup, Flow, Launch</li>
+              <li>12 pre-built flow templates</li>
+              <li>manual Run button for test execution</li>
+            </ul>
+          </div>
+          <div class="shipcut-col cut">
+            <h4>cut / deferred</h4>
+            <ul>
+              <li>workflow run history and error logs</li>
+              <li>version history for published flows</li>
+              <li>AI-assisted flow generation (designed, not shipped)</li>
+              <li>shared flow ownership (1 owner at launch)</li>
+              <li>mobile trigger support</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="case-h2"># numbers, 90 days post-launch</h2>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric-label">workflows created</span>
+            <span class="case-metric-value"><span class="now">847</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">manual tasks automated per week (team-wide)</span>
+            <span class="case-metric-value"><span class="now">340+</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">median time to build first workflow</span>
+            <span class="case-metric-value"><span class="now">14 minutes</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">shadow Zapier accounts decommissioned</span>
+            <span class="case-metric-value"><span class="was">3</span><span class="arrow">›</span><span class="now">0</span></span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric-label">"can't automate that" support tickets (month 3)</span>
+            <span class="case-metric-value"><span class="was">18/mo</span><span class="arrow">›</span><span class="now">0</span></span>
+          </div>
+        </div>
+
+        <h2 class="case-h2"># what I'd do differently</h2>
+        <p>
+          Data mapping is the hardest interaction in the product and I gave it the least design time. The "/" shortcut works but it's nearly invisible. I'd spend a full sprint just on discoverability before shipping.
+        </p>
+        <p>
+          I'd also cut action nodes at launch. We shipped 9. Users live inside 4 of them (Send Email, Update Record Field, Create Follow-up, If). The other 5 add surface area without adding meaningful value. Fewer nodes at launch means less to learn, fewer edge cases in QA, and a cleaner node list for the users who are actually confused.
+        </p>
+        <p>
+          And I'd ship run history on day one. Without it, debugging a broken workflow means re-running it manually and watching the canvas. That's fine for builders but terrible for the ops person who inherited a flow they didn't write.
+        </p>
+
+        <h2 class="case-h2"># credit</h2>
+        <p class="dim small">
+          Shipped with 1 PM and 3 engineers. The node model, canvas layout, and trigger taxonomy were my design. Data mapping UX was a joint design with eng, who owned the variable resolution. The conditional logic (If/Merge/Switch) went through four rounds of iteration before the True/False labeling settled. The 12 launch templates were written by two account managers who tested the tool through beta.
+        </p>
+
+        <div class="case-foot">
+          // onehq-workflow.case · end of file · type <span class="kbd">work</span> to go back.
         </div>
       </section>
 
