@@ -34,8 +34,16 @@ const PAGES = {
   'onehq-workflow':  { id: 'page-workflow',      path: '~/work/onehq-workflow' },
 };
 
-/* ---- Preview mode: ?preview in URL unlocks work ---- */
-const PREVIEW = new URLSearchParams(window.location.search).has('preview');
+/* ---- Preview / deep-link mode ----
+   ?preview  → unlocks work section (stays on home)
+   ?work     → unlocks work section AND jumps straight to the work list
+   ?cat=X    → unlocks work section AND opens case study X (e.g. onehq-workflow)
+---------------------------------------------------- */
+const _params  = new URLSearchParams(window.location.search);
+const PREVIEW  = _params.has('preview') || _params.has('work') || _params.has('cat');
+const DEEPLINK = _params.has('work') ? 'work'
+               : _params.has('cat')  ? _params.get('cat')
+               : null;
 
 /* ---- State ---- */
 const state = {
@@ -83,8 +91,12 @@ function finishBoot() {
   setTimeout(() => {
     els.boot.style.display = 'none';
     els.terminal.hidden = false;
-    els.cmdInput.focus();
-    setActiveNav('home');
+    if (DEEPLINK && PAGES[DEEPLINK]) {
+      navigate(DEEPLINK);
+    } else {
+      els.cmdInput.focus();
+      setActiveNav('home');
+    }
   }, 250);
 }
 
