@@ -540,7 +540,7 @@
 
         <h2 class="case-h2"># credit</h2>
         <p class="dim small">
-          Shipped with 1 PM and 2 engineers (L and M). The block model and canvas interactions were my design. The immutability model for freeze dates was a joint design with L, who implemented the snapshot guarantees. The report anatomy became a template other teams now reuse.
+          Shipped with 1 PM and 2 engineers (L and M). The block model and canvas interactions were my design. The freeze-date snapshot behavior was a joint design with L, who figured out how to make it actually immutable. The report structure became a template other teams now copy.
         </p>
 
         <div class="case-foot">
@@ -613,7 +613,7 @@
 
         <h2 class="case-h2"># the design bet: graph, not recipe</h2>
         <p>
-          Recipe-style automation (when X, do Y) would have covered roughly 70% of the use cases. The other 30% required branching: if a client responds within 48 hours, do this; if not, do that. For an insurance CRM, that 30% holds most of the actual value. Renewals are conditional. Claims routing is conditional. Everything downstream of an inbound request is conditional.
+          Recipe-style automation (when X, do Y) would have covered about 70% of the use cases. The other 30% required branching: if a client responds within 48 hours, do this; if not, do that. For an insurance CRM, that 30% holds most of the actual value. Renewals are conditional. Claims routing is conditional. Everything downstream of an inbound request is conditional.
         </p>
         <p>
           We went with a visual node graph.
@@ -636,7 +636,7 @@
 └──────────────────────────────────────────────────────────┘</div>
 
         <p>
-          The risk was complexity. These users were not developers. The mitigation was deliberate: nodes snap to a grid, edges draw themselves, the canvas boots with a single focused entry point before anything else is visible.
+          The risk was complexity. These users were not developers. So we constrained it hard: nodes snap to a grid, edges draw themselves, the canvas opens on a single question before anything else appears.
         </p>
 
         <figure class="case-img">
@@ -649,7 +649,7 @@
           We launched with eight triggers: Manual, On Schedule, On Field Change, On Email Received, On Chat Message, HTTP Request, On App Event, On Form Submission, Triggered by Another Workflow.
         </p>
         <p>
-          Getting there took six weeks and two rounds of user testing. "On Field Change" failed the language test. In early testing, 42% of users could explain what it would do from the label alone. We renamed it to "When a record is updated." Comprehension hit 89% in the second round. The naming was as much of a product decision as the feature itself.
+          Getting there took six weeks and two rounds of user testing. "On Field Change" failed the language test. In early testing, 42% of users could explain what it would do from the label alone. We renamed it to "When a record is updated." In the second round, 89% got it right on first read. The naming was as much of a product decision as the feature itself.
         </p>
 
         <figure class="case-img">
@@ -659,7 +659,7 @@
 
         <h2 class="case-h2"># node config: always inline, never a modal</h2>
         <p>
-          Each node opens its settings in a persistent right panel. Not a modal, never a modal. Account managers routinely need to reference other parts of the canvas while configuring a node. A modal blocks that view. A panel doesn't.
+          Each node opens its settings in a right panel that stays open. Not a modal, never a modal. Account managers need to look at other nodes in the canvas while they configure a new one. A modal blocks that. A panel doesn't.
         </p>
 
         <figure class="case-img">
@@ -681,7 +681,7 @@
           The branch node ships as "If." In testing we called it "Conditional," "Branch," "Route," and "Filter." "If" was the only name that didn't need a sentence of explanation after it.
         </p>
         <p>
-          The True/False labels on the output connectors caused the most confusion of anything in the product. We tested "Yes/No," "Match/No match," "Pass/Fail." Nothing worked cleanly. True/False survived because it mapped to what users had already seen in Zapier and in spreadsheet formulas. Known vocabulary beats perfect vocabulary.
+          The True/False labels on the output connectors caused the most confusion of anything in the product. We tested "Yes/No," "Match/No match," "Pass/Fail." Nothing landed cleanly. True/False survived because it's what people already knew from spreadsheet formulas and Zapier. Not great, but familiar. We kept it.
         </p>
 
         <figure class="case-img">
@@ -745,7 +745,7 @@
           Data mapping is the hardest interaction in the product and I gave it the least design time. The "/" shortcut works but it's nearly invisible. I'd spend a full sprint just on discoverability before shipping.
         </p>
         <p>
-          I'd also cut action nodes at launch. We shipped 9. Users live inside 4 of them (Send Email, Update Record Field, Create Follow-up, If). The other 5 add surface area without adding meaningful value. Fewer nodes at launch means less to learn, fewer edge cases in QA, and a cleaner node list for the users who are actually confused.
+          I'd also cut action nodes at launch. We shipped 9. Users live inside 4 of them (Send Email, Update Record Field, Create Follow-up, If). The other 5 are there and mostly ignored. Fewer nodes at launch means less to learn, fewer edge cases in QA, and a shorter list for people who are already overwhelmed.
         </p>
         <p>
           And I'd ship run history on day one. Without it, debugging a broken workflow means re-running it manually and watching the canvas. That's fine for builders but terrible for the ops person who inherited a flow they didn't write.
@@ -753,7 +753,7 @@
 
         <h2 class="case-h2"># credit</h2>
         <p class="dim small">
-          Shipped with 1 PM and 3 engineers. The node model, canvas layout, and trigger taxonomy were my design. Data mapping UX was a joint design with eng, who owned the variable resolution. The conditional logic (If/Merge/Switch) went through four rounds of iteration before the True/False labeling settled. The 12 launch templates were written by two account managers who tested the tool through beta.
+          Shipped with 1 PM and 3 engineers. The node model, canvas layout, and how triggers were named and organized were my design. Data mapping was a joint design with eng, who owned the underlying variable resolution. The conditional logic (If/Merge/Switch) went through four rounds before the True/False labeling settled. The 12 launch templates were written by two account managers who ran the beta.
         </p>
 
         <div class="case-foot">
