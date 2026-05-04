@@ -267,7 +267,7 @@ const COMMANDS = {
 
   // navigation
   home:    () => { navigate('home');    return null; },
-  work:    () => { if (PREVIEW) { navigate('work'); return null; } kernelPanic(); return null; },
+  work:    () => { kernelPanic(); return null; },
   about:   () => { navigate('about');   return null; },
   contact: () => { navigate('contact'); return null; },
   help:    () => { navigate('help');    return null; },
@@ -275,7 +275,8 @@ const COMMANDS = {
   // open case file
   cat: (name) => {
     if (!name) return { err: 'usage: cat <file>. try `cat onehq-comhub`' };
-    if (!PREVIEW) { kernelPanic(); return null; }
+    kernelPanic(); return null;
+    // (buttons bypass this handler and call navigate() directly)
     const key = name.replace(/\.case$/, '').toLowerCase();
     if (PAGES[key] && key.startsWith('onehq-')) {
       navigate(key);
@@ -541,7 +542,13 @@ function autocomplete() {
 function bindChips() {
   $$('[data-cmd]').forEach(btn => {
     btn.addEventListener('click', () => {
-      execute(btn.dataset.cmd);
+      const cmd = btn.dataset.cmd;
+      // Case file buttons bypass the terminal and navigate directly
+      if (cmd.startsWith('cat onehq-')) {
+        const key = cmd.replace('cat ', '');
+        if (PAGES[key]) { navigate(key); return; }
+      }
+      execute(cmd);
       els.cmdInput.focus();
     });
   });
@@ -557,10 +564,11 @@ function bindFileRows() {
       if (e.target.closest('[data-cmd]')) return;
       const targetId = file.dataset.target;
       if (!targetId) return;
-      // find page key that maps to this id
       const key = Object.keys(PAGES).find(k => PAGES[k].id === targetId);
       if (key) {
-        execute(key.startsWith('onehq-') ? `cat ${key}` : key);
+        // Case files navigate directly; other keys go through terminal
+        if (key.startsWith('onehq-')) navigate(key);
+        else execute(key);
       }
     });
   });
