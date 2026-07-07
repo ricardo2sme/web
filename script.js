@@ -23,16 +23,17 @@ const els = {
 };
 
 /* ---- Page registry ---- */
+const BASE_TITLE = 'Ricardo Dos Santos · Product & UX Designer';
 const PAGES = {
-  home:              { id: 'page-home',         path: '~' },
-  work:              { id: 'page-work',          path: '~/work' },
-  about:             { id: 'page-about',         path: '~/about' },
-  talks:             { id: 'page-talks',         path: '~/talks' },
-  contact:           { id: 'page-contact',       path: '~/contact' },
-  help:              { id: 'page-help',          path: '~/help' },
-  'onehq-comhub':    { id: 'page-com-hub',       path: '~/work/onehq-comhub' },
-  'onehq-reports':   { id: 'page-reports',       path: '~/work/onehq-reports' },
-  'onehq-workflow':  { id: 'page-workflow',      path: '~/work/onehq-workflow' },
+  home:              { id: 'page-home',         path: '~',                      url: '/',                    title: BASE_TITLE },
+  work:              { id: 'page-work',          path: '~/work',                url: '/work',                title: 'Work · Ricardo Dos Santos' },
+  about:             { id: 'page-about',         path: '~/about',               url: '/about',               title: 'About · Ricardo Dos Santos' },
+  talks:             { id: 'page-talks',         path: '~/talks',               url: '/talks',               title: 'Talks & Press · Ricardo Dos Santos' },
+  contact:           { id: 'page-contact',       path: '~/contact',             url: '/contact',             title: 'Contact · Ricardo Dos Santos' },
+  help:              { id: 'page-help',          path: '~/help',                url: '/help',                title: 'Help · Ricardo Dos Santos' },
+  'onehq-comhub':    { id: 'page-com-hub',       path: '~/work/onehq-comhub',   url: '/cat/onehq-comhub',   title: 'Work & Communication Hub · Ricardo Dos Santos' },
+  'onehq-reports':   { id: 'page-reports',       path: '~/work/onehq-reports',  url: '/cat/onehq-reports',  title: 'Report Builder · Ricardo Dos Santos' },
+  'onehq-workflow':  { id: 'page-workflow',      path: '~/work/onehq-workflow', url: '/cat/onehq-workflow', title: 'Workflow Automation Builder · Ricardo Dos Santos' },
 };
 
 /* ---- Preview / deep-link mode ----
@@ -49,13 +50,16 @@ const _params   = new URLSearchParams(window.location.search);
 const _pParam   = _params.get('p');
 const _pPath    = _pParam ? _pParam.replace(/^\//, '').split('/') : [];
 const _path     = window.location.pathname.replace(/^\//, '').split('/');
-const _keyFrom  = seg => (seg[0] === 'cat' ? seg[1] : seg[0] === 'work' ? 'work' : seg[0] === 'talks' ? 'talks' : null);
+const _keyFrom  = seg => (seg[0] === 'cat' ? (seg[1] || null)
+                        : ['work', 'talks', 'about', 'contact', 'help'].includes(seg[0]) ? seg[0]
+                        : null);
 const _pathKey  = _keyFrom(_pPath) || _keyFrom(_path);
 const DEEPLINK  = _pathKey
                || (_params.has('work') ? 'work' : null)
                || (_params.has('cat')  ? _params.get('cat') : null);
-// talks is a public page — deep-linking to it should not unlock the work chips
-const PREVIEW   = (!!DEEPLINK && DEEPLINK !== 'talks') || _params.has('preview');
+// only work / case-file deep links unlock the work chips; public pages don't
+const PREVIEW   = (!!DEEPLINK && (DEEPLINK === 'work' || DEEPLINK.startsWith('onehq-')))
+               || _params.has('preview');
 
 /* ---- State ---- */
 const state = {
@@ -104,7 +108,7 @@ function finishBoot() {
     els.boot.style.display = 'none';
     els.terminal.hidden = false;
     if (DEEPLINK && PAGES[DEEPLINK]) {
-      navigate(DEEPLINK);
+      navigate(DEEPLINK, { replace: true }); // also normalizes /?p=… → clean path
     } else {
       els.cmdInput.focus();
       setActiveNav('home');
@@ -240,7 +244,7 @@ function kernelPanic() {
 /* =============================================
    COMMAND ROUTER
    ============================================= */
-function navigate(pageKey) {
+function navigate(pageKey, opts = {}) {
   const page = PAGES[pageKey];
   if (!page) return false;
 
@@ -254,12 +258,30 @@ function navigate(pageKey) {
   els.output.scrollTop = 0;
   setActiveNav(pageKey);
 
+  // keep the address bar and tab title in sync with the visible page
+  document.title = page.title || BASE_TITLE;
+  if (opts.history !== false) {
+    if (opts.replace) {
+      history.replaceState({ page: pageKey }, '', page.url);
+    } else if (window.location.pathname !== page.url) {
+      history.pushState({ page: pageKey }, '', page.url);
+    }
+  }
+
   // clear any panic / response output on navigation
   els.cmdResponse.innerHTML = '';
   els.cmdResponse.hidden = true;
 
   return true;
 }
+
+// back / forward buttons walk the in-page history
+window.addEventListener('popstate', (e) => {
+  const key = (e.state && e.state.page)
+           || _keyFrom(window.location.pathname.replace(/^\//, '').split('/'))
+           || 'home';
+  if (PAGES[key]) navigate(key, { history: false });
+});
 
 function setActiveNav(key) {
   $$('.quick-nav .cmd-chip').forEach(b => {
