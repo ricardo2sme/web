@@ -37,12 +37,6 @@
         font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="13"
         fill="#6e6e6a">@ricardo2s.me : ~</text>
 
-  <!-- status dot + AVAILABLE -->
-  <circle cx="1098" cy="58" r="4.5" fill="#62c775"/>
-  <text x="1110" y="63"
-        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="12"
-        fill="#62c775">AVAILABLE</text>
-
   <!-- ASCII art – big block RDS -->
   <text x="72" y="172"
         font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="20"
