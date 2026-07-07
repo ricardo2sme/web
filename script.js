@@ -27,6 +27,7 @@ const PAGES = {
   home:              { id: 'page-home',         path: '~' },
   work:              { id: 'page-work',          path: '~/work' },
   about:             { id: 'page-about',         path: '~/about' },
+  talks:             { id: 'page-talks',         path: '~/talks' },
   contact:           { id: 'page-contact',       path: '~/contact' },
   help:              { id: 'page-help',          path: '~/help' },
   'onehq-comhub':    { id: 'page-com-hub',       path: '~/work/onehq-comhub' },
@@ -48,12 +49,13 @@ const _params   = new URLSearchParams(window.location.search);
 const _pParam   = _params.get('p');
 const _pPath    = _pParam ? _pParam.replace(/^\//, '').split('/') : [];
 const _path     = window.location.pathname.replace(/^\//, '').split('/');
-const _keyFrom  = seg => (seg[0] === 'cat' ? seg[1] : seg[0] === 'work' ? 'work' : null);
+const _keyFrom  = seg => (seg[0] === 'cat' ? seg[1] : seg[0] === 'work' ? 'work' : seg[0] === 'talks' ? 'talks' : null);
 const _pathKey  = _keyFrom(_pPath) || _keyFrom(_path);
 const DEEPLINK  = _pathKey
                || (_params.has('work') ? 'work' : null)
                || (_params.has('cat')  ? _params.get('cat') : null);
-const PREVIEW   = !!DEEPLINK || _params.has('preview');
+// talks is a public page — deep-linking to it should not unlock the work chips
+const PREVIEW   = (!!DEEPLINK && DEEPLINK !== 'talks') || _params.has('preview');
 
 /* ---- State ---- */
 const state = {
@@ -271,6 +273,7 @@ const COMMANDS = {
   home:    () => { navigate('home');    return null; },
   work:    () => { kernelPanic(); return null; },
   about:   () => { navigate('about');   return null; },
+  talks:   () => { navigate('talks');   return null; },
   contact: () => { navigate('contact'); return null; },
   help:    () => { navigate('help');    return null; },
 
@@ -292,6 +295,7 @@ const COMMANDS = {
     return [
       'drwxr-xr-x  work/      // selected case files',
       'drwxr-xr-x  about/     // whoami',
+      'drwxr-xr-x  talks/     // talks & press',
       'drwxr-xr-x  contact/   // say hi',
       '-rw-r--r--  README     // type "help" for commands',
     ].join('\n');
