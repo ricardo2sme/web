@@ -5,4 +5,4 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 directory = "."
 not_found_handling = "single-page-application"
-exclude = [".git", ".github", ".wrangler", ".claude", "404.html"]
+# excluded files live in .assetsignore (the "exclude" field is not supported for Workers assets)

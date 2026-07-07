@@ -1044,6 +1044,9 @@ button {
 .cmd-hint {
   position: absolute;
   left: 1em;
+  max-width: calc(100% - 1em);
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--dim);
   font-size: 13px;
   pointer-events: none;
