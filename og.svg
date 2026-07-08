@@ -9,6 +9,14 @@
       <stop offset="0%"   stop-color="transparent"/>
       <stop offset="100%" stop-color="rgba(0,0,0,0.55)"/>
     </radialGradient>
+    <!-- blend the portrait's left edge into the terminal bg -->
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#171719"/>
+      <stop offset="1"   stop-color="#171719" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="card">
+      <rect x="32" y="32" width="1136" height="566" rx="12"/>
+    </clipPath>
   </defs>
 
   <!-- bg -->
@@ -17,6 +25,15 @@
   <!-- subtle grid lines -->
   <rect width="1200" height="630" fill="url(#scan)" opacity="0.6"/>
   <rect width="1200" height="630" fill="url(#vig)"/>
+
+  <!-- portrait, right side (clipped to the card) -->
+  <g clip-path="url(#card)">
+    <image href="img/portrait.jpg" x="700" y="84" width="468" height="514"
+           preserveAspectRatio="xMidYMid slice"/>
+    <rect x="700" y="84" width="468" height="514" fill="rgba(0,0,0,0.25)"/>
+    <rect x="700" y="84" width="468" height="514" fill="url(#scan)" opacity="0.6"/>
+    <rect x="700" y="84" width="260" height="514" fill="url(#fade)"/>
+  </g>
 
   <!-- border frame -->
   <rect x="32" y="32" width="1136" height="566" rx="12"
@@ -97,9 +114,4 @@
   <text x="94" y="558"
         font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="14"
         fill="#6e6e6a">ricardo2s.me</text>
-
-  <!-- right side tag -->
-  <text x="1128" y="558" text-anchor="end"
-        font-family="'JetBrains Mono', 'Fira Mono', monospace" font-size="13"
-        fill="#3a3a3c">portfolio · 2026</text>
 </svg>
