@@ -36,17 +36,14 @@ const PAGES = {
   'onehq-workflow':  { id: 'page-workflow',      path: '~/work/onehq-workflow', url: '/cat/onehq-workflow', title: 'Workflow Automation Builder · Ricardo Dos Santos' },
 };
 
-/* ---- Preview / deep-link mode ----
-   Path-based (clean URLs via 404.html → ?p= redirect):
-     /work              → work list
+/* ---- Deep links ----
+   Path-based (SPA fallback serves index.html):
+     /work, /talks, /about, /contact, /help
      /cat/onehq-workflow → case study
-   Query-param fallback (still supported):
-     ?preview           → unlocks work, stays on home
-     ?work              → work list
-     ?cat=X             → case study
+   Query-param fallback (legacy links still work):
+     ?work → work list · ?cat=X → case study · ?p= from 404.html
 ---------------------------------------------------- */
 const _params   = new URLSearchParams(window.location.search);
-// ?p= is set by 404.html when GitHub Pages catches an unknown path
 const _pParam   = _params.get('p');
 const _pPath    = _pParam ? _pParam.replace(/^\//, '').split('/') : [];
 const _path     = window.location.pathname.replace(/^\//, '').split('/');
@@ -57,15 +54,13 @@ const _pathKey  = _keyFrom(_pPath) || _keyFrom(_path);
 const DEEPLINK  = _pathKey
                || (_params.has('work') ? 'work' : null)
                || (_params.has('cat')  ? _params.get('cat') : null);
-// only work / case-file deep links unlock the work chips; public pages don't
-const PREVIEW   = (!!DEEPLINK && (DEEPLINK === 'work' || DEEPLINK.startsWith('onehq-')))
-               || _params.has('preview');
 
 /* ---- State ---- */
 const state = {
   history: [],
   histIdx: -1,
   current: 'home',
+  workUnlocked: false, // first `work` runs the panic gag, then unlocks
 };
 
 /* =============================================
@@ -75,7 +70,7 @@ const BOOT_LINES = [
   { t: '✻ rds-os v1.0  ·  starting session',                    c: 'claude' },
   { t: '',                                                       c: 'dim'    },
   { t: '  loading /work ..................... [ OK ]',           c: 'ok'     },
-  { t: '  loading /brisaola .................. [ OK ]',           c: 'ok'     },
+  { t: '  loading /bresaola .................. [ OK ]',           c: 'ok'     },
   { t: '  starting ux-daemon ................ [ OK ]',           c: 'ok'     },
   { t: '  syncing design-system ............. [ OK ]',           c: 'ok'     },
   { t: '  auth: yo@ricardo2s.me .............. [ OK ]',           c: 'ok'     },
@@ -84,6 +79,17 @@ const BOOT_LINES = [
 ];
 
 function runBoot() {
+  // reduced motion: print the log at once, no typing theatrics
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    BOOT_LINES.forEach(line => {
+      const span = document.createElement('span');
+      span.className = line.c;
+      span.textContent = line.t + '\n';
+      els.bootLog.appendChild(span);
+    });
+    finishBoot();
+    return;
+  }
   let i = 0;
   function step() {
     if (i >= BOOT_LINES.length) {
@@ -119,7 +125,7 @@ function finishBoot() {
 /* =============================================
    KERNEL PANIC
    ============================================= */
-function kernelPanic() {
+function kernelPanic(opts = {}) {
   const term = els.terminal;
   const GLITCH = '░▒▓█▄▀■□▪▫◆●○⊕⊗▮▯⚡✖⚠';
 
@@ -202,7 +208,9 @@ function kernelPanic() {
     { t: '!! HALTING EXECUTION !!',                              cls: 'panic-line' },
     { t: '',                                                      cls: '' },
     { t: '__BANNER__',                                           cls: '__banner__' },
-    { t: '// case files loading. check back soon.',              cls: 'panic-note' },
+    { t: opts.override
+         ? '// override accepted · clearance granted · opening /work …'
+         : '// case files loading. check back soon.',            cls: 'panic-note' },
   ];
 
   let delay = 60;
@@ -239,6 +247,11 @@ function kernelPanic() {
     }, delay);
     delay += line.t ? 42 + Math.random() * 30 : 18;
   });
+
+  // override mode: after the theatrics, access is "granted" and /work opens
+  if (opts.override) {
+    setTimeout(() => navigate('work'), delay + 1200);
+  }
 }
 
 /* =============================================
@@ -252,6 +265,9 @@ function navigate(pageKey, opts = {}) {
   const el = document.getElementById(page.id);
   if (!el) return false;
   el.classList.add('is-active');
+  // kick lazy images: zero-height unloaded imgs can dodge the native lazy
+  // loader entirely, so once a page is opened, load its images outright
+  el.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
   els.sysPath.textContent = page.path;
   if (els.promptPath) els.promptPath.textContent = page.path;
   state.current = pageKey;
@@ -293,7 +309,14 @@ const COMMANDS = {
 
   // navigation
   home:    () => { navigate('home');    return null; },
-  work:    () => { kernelPanic(); return null; },
+  work:    () => {
+    // first hit: fake panic, then the override "grants access" and /work opens.
+    // after that, work opens instantly.
+    if (state.workUnlocked) { navigate('work'); return null; }
+    state.workUnlocked = true;
+    kernelPanic({ override: true });
+    return null;
+  },
   about:   () => { navigate('about');   return null; },
   talks:   () => { navigate('talks');   return null; },
   contact: () => { navigate('contact'); return null; },
@@ -302,8 +325,6 @@ const COMMANDS = {
   // open case file
   cat: (name) => {
     if (!name) return { err: 'usage: cat <file>. try `cat onehq-comhub`' };
-    kernelPanic(); return null;
-    // (buttons bypass this handler and call navigate() directly)
     const key = name.replace(/\.case$/, '').toLowerCase();
     if (PAGES[key] && key.startsWith('onehq-')) {
       navigate(key);
@@ -334,7 +355,7 @@ const COMMANDS = {
     return { ok: 'opening schedule link…' };
   },
 
-  email: () => ({ err: 'no public email. use `schedule` to book a quick call.' }),
+  email: () => ({ ok: 'yo@ricardo2s.me — or type `schedule` to book a call directly.' }),
 
   links: () => [
     'schedule  · calendar.notion.so/meet/ricardodossantos/quick-talk',
@@ -654,11 +675,6 @@ function bindFocus() {
    ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
   startUptime();
-
-  // preview mode: show work chips hidden by default
-  if (PREVIEW) {
-    $$('[data-cmd="work"]').forEach(el => el.style.display = '');
-  }
 
   bindChips();
   bindFileRows();

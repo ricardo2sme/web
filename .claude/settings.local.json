@@ -69,7 +69,21 @@
       "Bash(curl -s -o /Users/ricardo/Web/img/workflow-schedule.png \"https://www.figma.com/api/mcp/asset/33336d0f-1fbc-4165-8ba8-49ccc3ce56dc\")",
       "Bash(curl -s -o /Users/ricardo/Web/img/workflow-if.png \"https://www.figma.com/api/mcp/asset/b2137ff1-0962-4338-8dc9-31623b909f91\")",
       "Bash(ffprobe -v quiet -print_format json -show_streams /Users/ricardo/Desktop/web.mp4)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(s['codec_type'], s.get\\('codec_name'\\), s.get\\('width',''\\), s.get\\('height',''\\), s.get\\('duration',''\\), 'fps:', s.get\\('r_frame_rate',''\\)\\) for s in d.get\\('streams',[]\\)]\")"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(s['codec_type'], s.get\\('codec_name'\\), s.get\\('width',''\\), s.get\\('height',''\\), s.get\\('duration',''\\), 'fps:', s.get\\('r_frame_rate',''\\)\\) for s in d.get\\('streams',[]\\)]\")",
+      "Bash(curl -s https://api.cloudflare.com/client/v4/accounts/48d7f24f71ffbfa0ef738739648da394/pages/projects -H 'Authorization: Bearer nZO22F-Cbu7BBi7Cbute2zyFbNo1R5YS1aJcpRPhMic.4QMc2F_8E4BxKfVYX3Qo9G2lDeZjN_fUF0tBUr1Y3EM')",
+      "Bash(python3 -c \"import sys,json; print\\(json.dumps\\(json.load\\(sys.stdin\\), indent=2\\)\\)\")",
+      "Bash(curl -s https://api.cloudflare.com/client/v4/accounts/48d7f24f71ffbfa0ef738739648da394/workers/scripts -H 'Authorization: Bearer nZO22F-Cbu7BBi7Cbute2zyFbNo1R5YS1aJcpRPhMic.4QMc2F_8E4BxKfVYX3Qo9G2lDeZjN_fUF0tBUr1Y3EM')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(s.get\\('id','?'\\)\\) for s in \\(d.get\\('result'\\) or []\\)] or print\\('no workers'\\)\")",
+      "Bash(curl -s https://api.cloudflare.com/client/v4/accounts/48d7f24f71ffbfa0ef738739648da394/workers/scripts/web -H 'Authorization: Bearer nZO22F-Cbu7BBi7Cbute2zyFbNo1R5YS1aJcpRPhMic.4QMc2F_8E4BxKfVYX3Qo9G2lDeZjN_fUF0tBUr1Y3EM')",
+      "Bash(export PATH=\"/tmp/node-v22.15.0-darwin-arm64/bin:$PATH\")",
+      "Bash(wrangler deploy *)",
+      "Bash(curl -s https://api.cloudflare.com/client/v4/accounts/48d7f24f71ffbfa0ef738739648da394/workers/scripts/web/content -H 'Authorization: Bearer nZO22F-Cbu7BBi7Cbute2zyFbNo1R5YS1aJcpRPhMic.4QMc2F_8E4BxKfVYX3Qo9G2lDeZjN_fUF0tBUr1Y3EM' -o /tmp/worker-content.bin)",
+      "Bash(curl -s https://api.cloudflare.com/client/v4/accounts/48d7f24f71ffbfa0ef738739648da394/storage/kv/namespaces -H 'Authorization: Bearer nZO22F-Cbu7BBi7Cbute2zyFbNo1R5YS1aJcpRPhMic.4QMc2F_8E4BxKfVYX3Qo9G2lDeZjN_fUF0tBUr1Y3EM')",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' https://ricardo2s.me/.git/config)",
+      "Bash(echo \"== .git/config: $\\(curl -s -o /dev/null -w '%{http_code}' https://ricardo2s.me/.git/config\\)\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' https://ricardo2s.me/.claude/settings.local.json)",
+      "Bash(echo \"== settings.local.json: $\\(curl -s -o /dev/null -w '%{http_code}' https://ricardo2s.me/.claude/settings.local.json\\)\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' https://ricardo2s.me/wrangler.toml)"
     ]
   }
 }
