@@ -4,6 +4,22 @@
 
 'use strict';
 
+/* =============================================
+   CONFIG  ·  EL ÚNICO INTERRUPTOR QUE VAS A TOCAR
+   =============================================
+   WORK_LOCKED = false  → /work público. El comando `work` y los chips
+                          abren la lista de casos normalmente.
+
+   WORK_LOCKED = true   → /work oculto. `work` lanza el kernel panic y
+                          los chips desaparecen del nav. Los enlaces
+                          directos (/work, /cat/onehq-*) siguen
+                          funcionando, así podés mandarle un caso a
+                          alguien puntual aunque esté "cerrado".
+
+   Cambiá esta línea, guardá, y `wrangler deploy`. Nada más.
+   ============================================= */
+const WORK_LOCKED = false;
+
 /* ---- Element refs ---- */
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
@@ -60,7 +76,6 @@ const state = {
   history: [],
   histIdx: -1,
   current: 'home',
-  workUnlocked: false, // first `work` runs the panic gag, then unlocks
 };
 
 /* =============================================
@@ -125,7 +140,7 @@ function finishBoot() {
 /* =============================================
    KERNEL PANIC
    ============================================= */
-function kernelPanic(opts = {}) {
+function kernelPanic() {
   const term = els.terminal;
   const GLITCH = '░▒▓█▄▀■□▪▫◆●○⊕⊗▮▯⚡✖⚠';
 
@@ -208,9 +223,9 @@ function kernelPanic(opts = {}) {
     { t: '!! HALTING EXECUTION !!',                              cls: 'panic-line' },
     { t: '',                                                      cls: '' },
     { t: '__BANNER__',                                           cls: '__banner__' },
-    { t: opts.override
-         ? '// override accepted · clearance granted · opening /work …'
-         : '// case files loading. check back soon.',            cls: 'panic-note' },
+    { t: WORK_LOCKED
+         ? '// case files loading. check back soon.'
+         : '// just kidding. type `work` — everything is open.', cls: 'panic-note' },
   ];
 
   let delay = 60;
@@ -247,11 +262,6 @@ function kernelPanic(opts = {}) {
     }, delay);
     delay += line.t ? 42 + Math.random() * 30 : 18;
   });
-
-  // override mode: after the theatrics, access is "granted" and /work opens
-  if (opts.override) {
-    setTimeout(() => navigate('work'), delay + 1200);
-  }
 }
 
 /* =============================================
@@ -310,11 +320,8 @@ const COMMANDS = {
   // navigation
   home:    () => { navigate('home');    return null; },
   work:    () => {
-    // first hit: fake panic, then the override "grants access" and /work opens.
-    // after that, work opens instantly.
-    if (state.workUnlocked) { navigate('work'); return null; }
-    state.workUnlocked = true;
-    kernelPanic({ override: true });
+    if (WORK_LOCKED) { kernelPanic(); return null; }
+    navigate('work');
     return null;
   },
   about:   () => { navigate('about');   return null; },
@@ -325,6 +332,7 @@ const COMMANDS = {
   // open case file
   cat: (name) => {
     if (!name) return { err: 'usage: cat <file>. try `cat onehq-comhub`' };
+    if (WORK_LOCKED) { kernelPanic(); return null; }
     const key = name.replace(/\.case$/, '').toLowerCase();
     if (PAGES[key] && key.startsWith('onehq-')) {
       navigate(key);
@@ -336,7 +344,9 @@ const COMMANDS = {
   // listing
   ls: () => {
     return [
-      'drwxr-xr-x  work/      // selected case files',
+      WORK_LOCKED
+        ? 'd---------  work/      // permission denied'
+        : 'drwxr-xr-x  work/      // selected case files',
       'drwxr-xr-x  about/     // whoami',
       'drwxr-xr-x  talks/     // talks & press',
       'drwxr-xr-x  contact/   // say hi',
@@ -393,6 +403,8 @@ const COMMANDS = {
   vim: () => 'use `cat` instead. you\'ll thank me later.',
 
   ricardo: () => 'you found me.',
+
+  panic: () => { kernelPanic(); return null; },
 
   hello: () => 'hi 👋. type `work` to see what i\'ve been shipping.',
   hi:    () => COMMANDS.hello(),
@@ -592,9 +604,11 @@ function bindChips() {
   $$('[data-cmd]').forEach(btn => {
     btn.addEventListener('click', () => {
       const cmd = btn.dataset.cmd;
-      // Case file buttons bypass the terminal and navigate directly
-      if (cmd.startsWith('cat onehq-')) {
-        const key = cmd.replace('cat ', '');
+      // In-page links — [open] buttons and case breadcrumbs — navigate
+      // directly. They stay usable when WORK_LOCKED, so anyone arriving
+      // on a shared deep link can still move around inside /work.
+      if (cmd.startsWith('cat onehq-') || btn.classList.contains('link')) {
+        const key = cmd.startsWith('cat ') ? cmd.replace('cat ', '') : cmd;
         if (PAGES[key]) { navigate(key); return; }
       }
       execute(cmd);
@@ -675,6 +689,12 @@ function bindFocus() {
    ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
   startUptime();
+
+  // when work is locked, pull the nav chips so nothing advertises a dead end
+  if (WORK_LOCKED) {
+    $$('.quick-nav [data-cmd="work"], .hint [data-cmd="work"], [data-work-row]')
+      .forEach(el => { el.style.display = 'none'; });
+  }
 
   bindChips();
   bindFileRows();
