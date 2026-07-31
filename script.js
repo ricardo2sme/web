@@ -91,20 +91,39 @@ document.addEventListener('click', e => {
   navigate(page, { anchor });
 });
 
-/* ---- Copy to clipboard ------------------------------------------- */
+/* ---- Copy to clipboard -------------------------------------------
+   Three rungs, because the clipboard is never guaranteed: the async
+   API (needs a secure context, a user gesture, and permission), then
+   execCommand, and finally selecting the text so the reader can copy
+   it by hand. Only the last rung tells them to press ⌘C — by then the
+   text really is selected, so the instruction is true.
+-------------------------------------------------------------------- */
 async function copyText(text) {
-  // navigator.clipboard needs a secure context; fall back for the rest
   if (navigator.clipboard && window.isSecureContext) {
-    return navigator.clipboard.writeText(text);
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch { /* fall through */ }
   }
+
   const ta = document.createElement('textarea');
   ta.value = text;
   ta.setAttribute('readonly', '');
   ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
   document.body.appendChild(ta);
   ta.select();
-  document.execCommand('copy');
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch { ok = false; }
   ta.remove();
+  return ok;
+}
+
+function selectNode(el) {
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
 }
 
 document.addEventListener('click', async e => {
@@ -113,10 +132,12 @@ document.addEventListener('click', async e => {
 
   if (!btn.dataset.idle) btn.dataset.idle = btn.textContent;
 
-  try {
-    await copyText(btn.dataset.copy);
+  if (await copyText(btn.dataset.copy)) {
     btn.textContent = 'copied';
-  } catch {
+  } else {
+    // last resort: put it on screen, selected, and say so honestly
+    const shown = btn.closest('.row')?.querySelector('.row-sub');
+    if (shown) selectNode(shown);
     btn.textContent = 'press ⌘C';
   }
 

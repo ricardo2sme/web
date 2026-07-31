@@ -16,11 +16,15 @@
   --dim:   #7e7e7e;   /* meta, captions, labels */
   --faint: #4a4a4a;
   --line:  rgba(255, 255, 255, 0.13);
+  --accent: #5c8fd1;  /* the one colour on the page */
 
   --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, 'JetBrains Mono',
           'Cascadia Mono', Consolas, monospace;
 
-  --col: 660px;
+  --col:    920px;  /* index pages: gutter + content */
+  --read:   660px;  /* case studies: comfortable measure */
+  --gutter: 150px;
+  --gap:    40px;
 }
 
 html {
@@ -71,25 +75,49 @@ img, video { display: block; max-width: 100%; height: auto; }
 .page { display: none; }
 .page.is-active { display: block; }
 
+/* Case studies keep a narrow measure, but sit in the same content
+   column as the index rows so the text doesn't jump left when you
+   open one. The gutter stays empty here. */
+.page-case {
+  padding-left: calc(var(--gutter) + var(--gap));
+  max-width: calc(var(--read) + var(--gutter) + var(--gap));
+}
+
 /* =============================================
    INTRO
    ============================================= */
-.intro { margin-bottom: 80px; }
+/* the intro lines up with the content column, not the gutter */
+.intro {
+  margin-bottom: 80px;
+  padding-left: calc(var(--gutter) + var(--gap));
+  max-width: calc(var(--read) + var(--gutter) + var(--gap));
+}
 
 .intro p + p { margin-top: 20px; }
 .intro .name { color: var(--fg); font-weight: 500; }
 
 /* =============================================
    SECTIONS + ROWS
+   Label sits in a left gutter, rows run down the
+   right — a spec sheet rather than a stack.
    ============================================= */
-.section { margin-bottom: 72px; }
+.section {
+  display: grid;
+  grid-template-columns: var(--gutter) minmax(0, 1fr);
+  gap: 0 var(--gap);
+  margin-bottom: 72px;
+}
 .section:last-of-type { margin-bottom: 0; }
 
+.section > .row { grid-column: 2; }
+
 .label {
+  grid-column: 1;
+  grid-row: 1 / -1;          /* hold the gutter for the whole section */
   font-size: 14px;
   font-weight: 400;
   color: var(--dim);
-  margin-bottom: 12px;
+  padding-top: 16px;         /* align with the first row's text */
 }
 
 .row {
@@ -115,7 +143,7 @@ a.row .row-title {
   transition: text-decoration-color 0.15s;
 }
 
-a.row:hover .row-title { text-decoration-color: var(--fg); }
+a.row:hover .row-title { text-decoration-color: var(--accent); }
 a.row:hover .row-sub   { color: var(--body); }
 
 /* a row that carries its own actions instead of being one big link */
@@ -128,7 +156,7 @@ a.row-sub {
 }
 a.row-sub:hover {
   color: var(--body);
-  text-decoration-color: var(--faint);
+  text-decoration-color: var(--accent);
 }
 
 .copy {
@@ -142,11 +170,11 @@ a.row-sub:hover {
   transition: color 0.15s;
 }
 .copy:hover,
-.copy:focus-visible { color: var(--fg); }
-.copy.is-done { color: var(--fg); }
+.copy:focus-visible { color: var(--accent); }
+.copy.is-done { color: var(--accent); }
 
 :focus-visible {
-  outline: 1px solid var(--fg);
+  outline: 1px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -158,7 +186,7 @@ a.row-sub:hover {
   text-underline-offset: 3px;
   transition: text-decoration-color 0.15s;
 }
-.link:hover { text-decoration-color: var(--fg); }
+.link:hover { text-decoration-color: var(--accent); }
 
 /* =============================================
    CASE STUDY
@@ -169,7 +197,7 @@ a.row-sub:hover {
   color: var(--dim);
   transition: color 0.15s;
 }
-.back:hover { color: var(--fg); }
+.back:hover { color: var(--accent); }
 
 .case-title {
   font-size: 20px;
@@ -306,6 +334,19 @@ figure.case-img video { width: 100%; }
 /* =============================================
    RESPONSIVE
    ============================================= */
+/* below the gutter's comfortable width, fold the label back on top */
+@media (max-width: 860px) {
+  .intro, .page-case { padding-left: 0; }
+  .section { grid-template-columns: minmax(0, 1fr); }
+  .section > .row { grid-column: 1; }
+  .label {
+    grid-column: 1;
+    grid-row: auto;
+    padding-top: 0;
+    margin-bottom: 12px;
+  }
+}
+
 @media (max-width: 620px) {
   .wrap { padding: 72px 20px 80px; }
   .intro { margin-bottom: 56px; }
