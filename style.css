@@ -76,18 +76,6 @@ img, video { display: block; max-width: 100%; height: auto; }
    ============================================= */
 .intro { margin-bottom: 80px; }
 
-.mark {
-  display: inline-block;
-  margin-bottom: 56px;
-  padding: 5px 9px;
-  border: 1px solid var(--line);
-  color: var(--fg);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.08em;
-}
-
 .intro p + p { margin-top: 20px; }
 .intro .name { color: var(--fg); font-weight: 500; }
 
@@ -95,6 +83,7 @@ img, video { display: block; max-width: 100%; height: auto; }
    SECTIONS + ROWS
    ============================================= */
 .section { margin-bottom: 72px; }
+.section:last-of-type { margin-bottom: 0; }
 
 .label {
   font-size: 14px;
@@ -138,11 +127,6 @@ a.row:hover .row-sub   { color: var(--body); }
   transition: text-decoration-color 0.15s;
 }
 .link:hover { text-decoration-color: var(--fg); }
-
-.foot {
-  margin-top: 96px;
-  color: var(--faint);
-}
 
 /* =============================================
    CASE STUDY
@@ -294,7 +278,6 @@ figure.case-img video { width: 100%; }
   .wrap { padding: 72px 20px 80px; }
   .intro { margin-bottom: 56px; }
   .section { margin-bottom: 56px; }
-  .mark { margin-bottom: 40px; }
 
   .kv { grid-template-columns: 96px 1fr; gap: 0 12px; }
   .shipcut { grid-template-columns: 1fr; gap: 24px; }
