@@ -87,7 +87,8 @@
       "Bash(ls /tmp/node-v22.15.0-darwin-arm64/bin/ 2>/dev/null || echo \"node borrado por limpieza de /tmp\")",
       "Bash(curl -fsSL https://nodejs.org/dist/v22.15.0/node-v22.15.0-darwin-arm64.tar.gz -o /private/tmp/claude-503/-Users-ricardo-Web/2a574eb7-63ce-40e8-ba7f-1e40419f65df/scratchpad/node.tar.gz)",
       "Bash(tar -xzf /private/tmp/claude-503/-Users-ricardo-Web/2a574eb7-63ce-40e8-ba7f-1e40419f65df/scratchpad/node.tar.gz -C /private/tmp/claude-503/-Users-ricardo-Web/2a574eb7-63ce-40e8-ba7f-1e40419f65df/scratchpad)",
-      "Bash(/private/tmp/claude-503/-Users-ricardo-Web/2a574eb7-63ce-40e8-ba7f-1e40419f65df/scratchpad/node-v22.15.0-darwin-arm64/bin/node --version)"
+      "Bash(/private/tmp/claude-503/-Users-ricardo-Web/2a574eb7-63ce-40e8-ba7f-1e40419f65df/scratchpad/node-v22.15.0-darwin-arm64/bin/node --version)",
+      "Bash(python3 -)"
     ]
   }
 }
