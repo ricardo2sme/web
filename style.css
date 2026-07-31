@@ -12,8 +12,8 @@
 :root {
   --bg:    #fff;
   --fg:    #111;      /* headings, emphasis */
-  --body:  #444;      /* running prose        — 9.7:1 */
-  --dim:   #6e6e6e;   /* meta, captions, labels — 5.1:1 */
+  --body:  #444;      /* running prose        - 9.7:1 */
+  --dim:   #6e6e6e;   /* meta, captions, labels - 5.1:1 */
   --faint: #a3a3a3;   /* decoration only, never plain text */
   --line:  rgba(0, 0, 0, 0.14);
 

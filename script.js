@@ -19,7 +19,7 @@ const PAGES = {
   'onehq-reports':  { id: 'page-reports',  url: '/cat/onehq-reports',  title: 'Report Builder · Ricardo Dos Santos' },
 };
 
-// Old URLs still get shared — land them on home, at the right section.
+// Old URLs still get shared - land them on home, at the right section.
 const LEGACY = {
   work:    'work',
   talks:   'talks',
@@ -95,7 +95,7 @@ document.addEventListener('click', e => {
    Three rungs, because the clipboard is never guaranteed: the async
    API (needs a secure context, a user gesture, and permission), then
    execCommand, and finally selecting the text so the reader can copy
-   it by hand. Only the last rung tells them to press ⌘C — by then the
+   it by hand. Only the last rung tells them to press ⌘C - by then the
    text really is selected, so the instruction is true.
 -------------------------------------------------------------------- */
 async function copyText(text) {
