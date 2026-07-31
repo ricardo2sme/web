@@ -91,6 +91,43 @@ document.addEventListener('click', e => {
   navigate(page, { anchor });
 });
 
+/* ---- Copy to clipboard ------------------------------------------- */
+async function copyText(text) {
+  // navigator.clipboard needs a secure context; fall back for the rest
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  ta.remove();
+}
+
+document.addEventListener('click', async e => {
+  const btn = e.target.closest('[data-copy]');
+  if (!btn) return;
+
+  if (!btn.dataset.idle) btn.dataset.idle = btn.textContent;
+
+  try {
+    await copyText(btn.dataset.copy);
+    btn.textContent = 'copied';
+  } catch {
+    btn.textContent = 'press ⌘C';
+  }
+
+  btn.classList.add('is-done');
+  clearTimeout(btn.resetTimer);
+  btn.resetTimer = setTimeout(() => {
+    btn.textContent = btn.dataset.idle;
+    btn.classList.remove('is-done');
+  }, 1600);
+});
+
 /* ---- Boot -------------------------------------------------------- */
 const entry = resolve(raw);
 navigate(entry.page, { replace: true, anchor: entry.anchor });

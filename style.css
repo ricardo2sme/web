@@ -118,6 +118,38 @@ a.row .row-title {
 a.row:hover .row-title { text-decoration-color: var(--fg); }
 a.row:hover .row-sub   { color: var(--body); }
 
+/* a row that carries its own actions instead of being one big link */
+a.row-sub {
+  justify-self: start;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+a.row-sub:hover {
+  color: var(--body);
+  text-decoration-color: var(--faint);
+}
+
+.copy {
+  justify-self: end;
+  font: inherit;
+  color: var(--faint);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.copy:hover,
+.copy:focus-visible { color: var(--fg); }
+.copy.is-done { color: var(--fg); }
+
+:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+}
+
 /* inline links inside prose and contact rows */
 .link {
   color: var(--fg);
@@ -287,6 +319,7 @@ figure.case-img video { width: 100%; }
   .row, .case-metric { grid-template-columns: 1fr; }
   .row-meta, .case-metric-value { text-align: left; }
   .row-meta { order: 3; }
+  .copy { order: 4; justify-self: start; }
 }
 
 /* =============================================
