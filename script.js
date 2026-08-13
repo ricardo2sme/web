@@ -20,8 +20,9 @@ const PAGES = {
 };
 
 // Old URLs still get shared - land them on home, at the right section.
+// `work` has no section any more, so it just lands at the top.
 const LEGACY = {
-  work:    'work',
+  work:    null,
   talks:   'talks',
   about:   'experience',
   contact: 'contact',
