@@ -364,7 +364,11 @@ figure.case-img video { width: 100%; }
   100% { transform: translateY(70vh) rotate(5deg); opacity: 0; }
 }
 
-/* the paper */
+/* the paper.
+   NB: this rule's `display` would otherwise beat the browser's
+   [hidden] { display:none }, leaving the scene on screen at load. */
+.scene[hidden] { display: none; }
+
 .scene {
   position: fixed;
   inset: 0;
