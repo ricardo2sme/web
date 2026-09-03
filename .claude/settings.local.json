@@ -91,7 +91,8 @@
       "Bash(python3 -)",
       "Bash(curl -sL -o /private/tmp/claude-503/-Users-ricardo-Web/9361898f-6878-42ff-a058-70cc73ad323a/scratchpad/comp_page.png \"https://www.figma.com/api/mcp/asset/e80af5e0-5da0-402e-ad42-d87f9b2c32c2.png\")",
       "Bash(curl -sL -o /private/tmp/claude-503/-Users-ricardo-Web/9361898f-6878-42ff-a058-70cc73ad323a/scratchpad/comp_page2.png \"https://www.figma.com/api/mcp/asset/57e1aff1-c631-4c49-99be-d2baf586445f.png\")",
-      "Bash(curl -sL -o /private/tmp/claude-503/-Users-ricardo-Web/9361898f-6878-42ff-a058-70cc73ad323a/scratchpad/comp_page3.png \"https://www.figma.com/api/mcp/asset/63734244-dc3d-40d7-a5b7-55d821512f70.png\")"
+      "Bash(curl -sL -o /private/tmp/claude-503/-Users-ricardo-Web/9361898f-6878-42ff-a058-70cc73ad323a/scratchpad/comp_page3.png \"https://www.figma.com/api/mcp/asset/63734244-dc3d-40d7-a5b7-55d821512f70.png\")",
+      "Bash(git checkout *)"
     ]
   }
 }
