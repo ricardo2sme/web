@@ -150,6 +150,62 @@ document.addEventListener('click', async e => {
   }, 1600);
 });
 
+/* ---- Easter egg ---------------------------------------------------
+   Three clicks on the portrait and the page falls away, replaced by an
+   inked landscape that draws itself. Deliberately unadvertised: the
+   photo gets no cursor, no title, no hint of any kind.
+-------------------------------------------------------------------- */
+(() => {
+  const photo = document.querySelector('.portrait');
+  const scene = document.getElementById('scene');
+  if (!photo || !scene) return;
+
+  let clicks = 0, timer = null, open = false;
+
+  // Each stroke is dashed by its own length, so long ridgelines take
+  // longer to draw than short hatch marks - it reads like a hand.
+  function prepare() {
+    const paths = scene.querySelectorAll('.ink path');
+    let wait = 0;
+    paths.forEach(p => {
+      const len = Math.ceil(p.getTotalLength());
+      p.style.setProperty('--len', len);
+      p.style.setProperty('--wait', wait + 'ms');
+      wait += Math.min(90, 26 + len / 26);
+    });
+  }
+
+  function show() {
+    open = true;
+    document.body.classList.add('is-breaking');
+    setTimeout(() => {
+      scene.hidden = false;
+      prepare();
+    }, 520);
+  }
+
+  function hide() {
+    if (!open) return;
+    open = false;
+    clicks = 0;
+    scene.hidden = true;
+    document.body.classList.remove('is-breaking');
+  }
+
+  photo.addEventListener('click', () => {
+    if (open) return;
+    clicks++;
+    clearTimeout(timer);
+    timer = setTimeout(() => { clicks = 0; }, 600);
+    if (clicks >= 3) { clicks = 0; show(); }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hide();
+  });
+  scene.addEventListener('click', hide);
+})();
+
 /* ---- Boot -------------------------------------------------------- */
 const entry = resolve(raw);
 navigate(entry.page, { replace: true, anchor: entry.anchor });

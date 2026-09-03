@@ -612,6 +612,78 @@
     </main>
   </div>
 
+  <!-- Easter egg. Reached by triple-clicking the portrait; no affordance by design. -->
+  <div class="scene" id="scene" hidden>
+    <svg class="scene-art" viewBox="0 0 900 520" fill="none" aria-hidden="true"
+         stroke="#15130f" stroke-linecap="round" stroke-linejoin="round">
+      <defs>
+        <!-- warps clean vectors into ragged, charcoal-ish lines -->
+        <filter id="rough" x="-12%" y="-12%" width="124%" height="124%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.032" numOctaves="4" seed="11" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="rough2" x="-12%" y="-12%" width="124%" height="124%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="29" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+
+      <!-- birds -->
+      <g class="ink" stroke-width="2.2" filter="url(#rough2)">
+        <path d="M250 104c13-12 24-10 32 2 10-11 21-10 30 3" />
+        <path d="M256 108c12-11 23-9 31 3" opacity=".45" />
+        <path d="M640 142c9-8 17-7 23 2 7-8 15-7 21 2" />
+      </g>
+
+      <!-- distant range -->
+      <g class="ink" stroke-width="1.6" opacity=".35" filter="url(#rough)">
+        <path d="M40 330 148 250l44 44 86-78 58 62 74-56 90 92 66-58 92 86 112-70 96 88" />
+      </g>
+
+      <!-- the range, gone over twice like a hand would -->
+      <g class="ink" stroke-width="3.6" filter="url(#rough)">
+        <path d="M62 430 250 206l70 84 132-146 94 122 64-54 92 88 138 130" />
+      </g>
+      <g class="ink" stroke-width="2.2" opacity=".55" filter="url(#rough2)">
+        <path d="M68 428 252 212l68 82 130-142 96 118 62-50 94 86 134 128" />
+      </g>
+
+      <!-- creases -->
+      <g class="ink" stroke-width="1.9" opacity=".7" filter="url(#rough2)">
+        <path d="M250 206l16 44-12 20 20 30" />
+        <path d="M452 148l20 56-16 26 26 40-14 26" />
+        <path d="M610 214l14 34-10 18 18 26" />
+      </g>
+
+      <!-- hatching: down the shaded faces, reaching toward the ground -->
+      <g class="ink hatch" stroke-width="1.7" opacity=".45" filter="url(#rough)">
+        <path d="M256 218l26 96M266 230l30 106M276 242l30 112M288 256l30 116M298 268l28 108M310 282l24 92M320 294l20 76" />
+        <path d="M460 160l30 108M472 176l34 124M484 190l38 138M496 206l40 148M508 220l42 154M520 236l40 148M532 250l38 140M544 266l34 126M556 280l30 110M568 294l26 94" />
+        <path d="M616 222l22 78M626 234l24 84M638 248l24 86M648 260l22 78M660 274l20 70" />
+        <path d="M706 308l26 84M718 322l28 88M730 336l28 90M742 350l26 82M754 364l22 68" />
+      </g>
+
+      <!-- pines: filled silhouettes, roughened so they read as ink -->
+      <g class="fill" fill="#15130f" stroke="none" filter="url(#rough2)">
+        <path d="M150 434h-3v-12l-11 5 6-9-9 3 8-11-7 2 8-11-6 1 12-17 12 17-6-1 8 11-7-2 8 11-9-3 6 9-11-5v12h-3z" />
+        <path d="M214 434h-2v-9l-8 4 5-7-7 2 6-8-5 1 6-8-5 1 9-13 9 13-5-1 6 8-5-1 6 8-7-2 5 7-8-4v9h-2z" />
+        <path d="M778 434h-3v-11l-10 5 6-8-9 3 8-11-7 2 8-11-6 1 12-16 12 16-6-1 8 11-7-2 8 11-9-3 6 8-10-5v11h-3z" />
+        <path d="M826 434h-2v-9l-8 4 5-7-7 2 6-8-5 1 6-8-5 1 9-13 9 13-5-1 6 8-5-1 6 8-7-2 5 7-8-4v9h-2z" />
+      </g>
+
+      <!-- ground: one line, gone over in broken passes -->
+      <g class="ink ground" stroke-width="2.8" filter="url(#rough)">
+        <path d="M48 438h804" />
+      </g>
+      <g class="ink ground" stroke-width="1.8" opacity=".4" filter="url(#rough2)">
+        <path d="M96 448h132M268 450h96M404 447h150M596 450h104M736 448h96" />
+        <path d="M140 460h74M348 462h58M534 458h96M700 461h70" />
+      </g>
+    </svg>
+
+    <p class="scene-note">Valtellina, from the window. <span>esc</span></p>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
