@@ -626,6 +626,10 @@
           <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="29" result="n" />
           <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" />
         </filter>
+        <filter id="rough3" x="-25%" y="-25%" width="150%" height="150%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="5" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
       </defs>
 
       <!-- birds -->
@@ -669,6 +673,32 @@
         <path d="M214 436h-2v-9l-8 4 5-7-7 2 6-8-5 1 6-8-5 1 9-13 9 13-5-1 6 8-5-1 6 8-7-2 5 7-8-4v9h-2z" />
         <path d="M786 436h-3v-11l-10 5 6-8-9 3 8-11-7 2 8-11-6 1 12-16 12 16-6-1 8 11-7-2 8 11-9-3 6 8-10-5v11h-3z" />
         <path d="M832 436h-2v-9l-8 4 5-7-7 2 6-8-5 1 6-8-5 1 9-13 9 13-5-1 6 8-5-1 6 8-7-2 5 7-8-4v9h-2z" />
+      </g>
+
+      <!-- stone houses on the lower slopes: piode roof, chimney, small openings -->
+      <g class="ink house" stroke-width="1.9" filter="url(#rough3)">
+        <g transform="translate(300,434)">
+          <path d="M-19 0v-17M19 0v-17M-19 0h38" />
+          <path d="M-25-16 0-34l25 18" />
+          <path d="M-25-19 0-37l25 18" />
+          <path d="M-21-17h42" />
+          <path d="M13-27v-11h6v8" />
+          <path d="M-7 0v-10h7v10" />
+          <path d="M6-8v-5h6v5z" />
+          <path d="M-16-5h7M-4-5h6M8-4h8M-16-11h6M4-12h5" opacity=".6" />
+          <path d="M-19-23l8-5M-13-26l8-5M6-29l8 5M13-25l8 5" opacity=".55" />
+        </g>
+        <g transform="translate(712,432) scale(.82)">
+          <path d="M-19 0v-17M19 0v-17M-19 0h38" />
+          <path d="M-25-16 0-34l25 18" />
+          <path d="M-25-19 0-37l25 18" />
+          <path d="M-21-17h42" />
+          <path d="M-19-27v-11h6v8" />
+          <path d="M-4 0v-10h7v10" />
+          <path d="M8-8v-5h6v5z" />
+          <path d="M-16-5h7M-4-5h6M8-4h8M-16-11h6M4-12h5" opacity=".6" />
+          <path d="M-19-23l8-5M-13-26l8-5M6-29l8 5M13-25l8 5" opacity=".55" />
+        </g>
       </g>
 
       <!-- shoreline, where the range meets the water -->
