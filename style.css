@@ -110,7 +110,10 @@ img, video { display: block; max-width: 100%; height: auto; }
   font-size: 14px;
   font-weight: 400;
   color: var(--dim);
-  margin-bottom: 12px;
+  /* The first row already contributes 16px of its own padding, so the
+     visible gap is this plus that. Kept small so the heading reads as
+     attached to its list. */
+  margin-bottom: 2px;
 }
 
 .row {
