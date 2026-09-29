@@ -12,7 +12,21 @@
 const SITE = 'https://ricardo2s.me';
 const IMAGE = `${SITE}/og.jpg`;
 
+/* /works is canonical. The other two are the spellings people reach
+   for, redirected rather than duplicated so the index has one URL. */
+const ALIASES = {
+  '/work': '/works',
+  '/projects': '/works',
+};
+
 const ROUTES = {
+  '/works': {
+    title: 'Selected work - Ricardo Dos Santos',
+    description:
+      'Three design case studies from OneHQ, an enterprise CRM for the ' +
+      'insurance industry: a workflow automation builder, a communication hub ' +
+      'with a Speed Work mode, and a report builder composing live data.',
+  },
   '/cat/onehq-workflow': {
     title: 'Workflow Automation Builder - Ricardo Dos Santos',
     description:
@@ -57,6 +71,11 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, '') || '/';
+
+    const alias = ALIASES[path];
+    if (alias) {
+      return Response.redirect(new URL(alias + url.search, url.origin).toString(), 301);
+    }
 
     const res = await env.ASSETS.fetch(request);
 

@@ -14,20 +14,23 @@ const BASE_TITLE = 'Ricardo Dos Santos · Product & UX Designer';
 
 const PAGES = {
   home:             { id: 'page-home',     url: '/',                   title: BASE_TITLE },
+  works:            { id: 'page-works',    url: '/works',              title: 'Selected work - Ricardo Dos Santos' },
   'onehq-workflow': { id: 'page-workflow', url: '/cat/onehq-workflow', title: 'Workflow Automation Builder · Ricardo Dos Santos' },
   'onehq-comhub':   { id: 'page-com-hub',  url: '/cat/onehq-comhub',   title: 'Work & Communication Hub · Ricardo Dos Santos' },
   'onehq-reports':  { id: 'page-reports',  url: '/cat/onehq-reports',  title: 'Report Builder · Ricardo Dos Santos' },
 };
 
 // Old URLs still get shared - land them on home, at the right section.
-// `work` has no section any more, so it just lands at the top.
+// `work` and `projects` are aliases of the works index; the Worker 301s
+// them, this only covers client-side navigation.
 const LEGACY = {
-  work:    null,
   talks:   'talks',
   about:   'experience',
   contact: 'contact',
   help:    null,
 };
+
+const ALIASES = { work: 'works', projects: 'works' };
 
 /* ---- Resolve the incoming URL ----------------------------------- */
 const params = new URLSearchParams(location.search);
@@ -36,6 +39,8 @@ const raw    = (params.get('p') || location.pathname).replace(/^\/+/, '').split(
 
 function resolve(seg) {
   if (seg[0] === 'cat' && PAGES[seg[1]]) return { page: seg[1] };
+  if (seg[0] in ALIASES)                 return { page: ALIASES[seg[0]] };
+  if (PAGES[seg[0]])                     return { page: seg[0] };
   if (seg[0] in LEGACY)                  return { page: 'home', anchor: LEGACY[seg[0]] };
   if (params.has('cat') && PAGES[params.get('cat')]) return { page: params.get('cat') };
   if (params.has('work'))                return { page: 'home', anchor: 'work' };

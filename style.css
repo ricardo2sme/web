@@ -200,6 +200,12 @@ a.row-sub:hover {
   margin-bottom: 28px;
 }
 
+.works-lede {
+  max-width: 62ch;
+  margin-bottom: 44px;
+  color: var(--body);
+}
+
 .case-meta {
   margin-bottom: 36px;
   padding-bottom: 4px;

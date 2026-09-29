@@ -34,6 +34,8 @@ example: hand-written, no framework, no build step.
 
 ## Selected work
 
+Index of all three: https://ricardo2s.me/works
+
 All three case studies are at OneHQ, an enterprise CRM for the insurance
 industry. Each is written up with the research that preceded it, the trade-offs
 taken, and what was cut.
