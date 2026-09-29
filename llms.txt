@@ -1,0 +1,87 @@
+# Ricardo Dos Santos
+
+> Product and UX designer based in Sondrio, Italy. Works at the seam of design
+> and code: design engineering, AI-assisted prototyping, and design systems for
+> dense, complex software. Product Designer at OneHQ since 2022. Open to new
+> work, remote or in the EU.
+
+Contact: yo@ricardo2s.me · https://ricardo2s.me
+
+## Who he is
+
+Ricardo Dos Santos designs the interfaces that operations teams live inside all
+day: dense tables, multi-step flows, automation canvases, reporting tools. His
+work is characterised by measuring a problem before designing for it, shipping
+deliberately small, and being willing to argue for the unpopular feature when
+the numbers support it.
+
+He builds as well as designs. He prototypes in HTML, CSS and TypeScript, works
+with light React, and uses agentic coding tools (Claude Code, Cursor, MCP) as
+part of his everyday design process rather than as a novelty. This site is an
+example: hand-written, no framework, no build step.
+
+## What he does
+
+- **Design engineering** — designs that survive contact with code, prototyped
+  in the browser rather than mocked up and thrown over a wall.
+- **Complex and dense UI** — enterprise CRM, insurance operations, reporting,
+  automation builders. Interfaces with real density and real deadlines.
+- **Design systems** — component models, naming, and the governance that keeps
+  them from rotting.
+- **Product research** — contextual inquiry (shadowing users at their desks),
+  usability testing, comprehension testing of naming and labels, synthesis.
+- **AI-assisted prototyping** — using LLM tooling to move from idea to a
+  working, clickable artefact in hours.
+
+## Selected work
+
+All three case studies are at OneHQ, an enterprise CRM for the insurance
+industry. Each is written up with the research that preceded it, the trade-offs
+taken, and what was cut.
+
+- [Workflow Automation Builder](https://ricardo2s.me/cat/onehq-workflow) (2025):
+  A node-based automation builder so insurance account managers could own their
+  own workflows without going through engineering. 847 automations created in
+  the first 90 days; three shadow Zapier accounts decommissioned. The hard part
+  was not the canvas, it was getting non-technical users past the words
+  "trigger" and "conditional" — renaming "On Field Change" to "When a record is
+  updated" moved comprehension from 42% to 89%.
+- [Work & Communication Hub](https://ricardo2s.me/cat/onehq-comhub) (2024):
+  A persistent workbar and a "Speed Work" mode for power users. Median
+  time-to-send dropped from 47 seconds to 19 for power users, and context
+  switches per send from 6.2 to 2.1. The design argument that landed was not
+  "power users want this" but "those 12% of users drive 58% of our sends".
+- [Report Builder](https://ricardo2s.me/cat/onehq-reports) (2023): Replaced a
+  manual slides-and-exports process with a canvas that composes reports from
+  live data, with freeze-dated snapshots and scheduled delivery. Monthly report
+  prep fell from 4h 28m to 22 minutes, and the support category for "wrong
+  carrier name" closed entirely.
+
+## Experience
+
+- **OneHQ** — Product Designer, 2022 to present. Enterprise CRM for insurance.
+- **Sounds.co** — Product Designer, 2021 to 2022.
+- **Quanto** — 2019 to 2021.
+- **Freelance** — UI and visual design, 2018 to 2019.
+
+## Talks and press
+
+- [Using AI to optimize the UX design process](https://www.youtube.com/watch?v=5tUJJ2RIlOk)
+  — talk, February 2024.
+- [Working remotely from Italy](https://primalavaltellina.it/tempo-libero/eventi/terza-edizione-dellappuntamento-annuale-di-sondrio-domani-dalle-parole-ai-fatti-la-valtellina-che-cambia/)
+  — press, Prima la Valtellina, October 2024.
+- [Prototyping and usability testing](https://www.youtube.com/watch?v=HroZjVayy50)
+  — talk for the UX Paraguay community, May 2020.
+
+## Tools
+
+Figma and Figma AI, design systems, prototyping, motion. Interviews, usability
+testing, synthesis. HTML/CSS/TypeScript, light React, v0. Claude Code, Cursor,
+MCP, agents.
+
+## Elsewhere
+
+- Email: yo@ricardo2s.me
+- Book a call: https://calendar.notion.so/meet/ricardodossantos/quick-talk
+- LinkedIn: https://www.linkedin.com/in/dsmartinucci/
+- Dribbble: https://dribbble.com/dsmartinucci

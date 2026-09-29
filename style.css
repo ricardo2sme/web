@@ -88,7 +88,16 @@ img, video { display: block; max-width: 100%; height: auto; }
 
 .intro { margin-bottom: 80px; }
 
-.intro p + p { margin-top: 20px; }
+/* The lead line is the page's h1 so the document has a top-level
+   heading; it is deliberately styled to read as running text. */
+.intro h1 {
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  color: inherit;
+}
+
+.intro > * + * { margin-top: 20px; }
 .intro .name { color: var(--fg); font-weight: 500; }
 
 /* =============================================

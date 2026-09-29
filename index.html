@@ -29,23 +29,161 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23fff'/><text x='50' y='72' text-anchor='middle' font-family='monospace' font-size='64' font-weight='500' fill='%23111'>R</text></svg>" />
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Ricardo Dos Santos",
-    "url": "https://ricardo2s.me",
-    "email": "yo@ricardo2s.me",
-    "jobTitle": "Product & UX Designer",
-    "description": "Product & UX Designer at OneHQ since 2022, specialising in design engineering, AI prototyping, and design systems for complex software.",
-    "worksFor": { "@type": "Organization", "name": "OneHQ" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Sondrio", "addressCountry": "IT" },
-    "sameAs": [
-      "https://www.linkedin.com/in/dsmartinucci/",
-      "https://dribbble.com/dsmartinucci",
-      "https://www.youtube.com/watch?v=5tUJJ2RIlOk",
-      "https://www.youtube.com/watch?v=HroZjVayy50"
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://ricardo2s.me/#page",
+      "url": "https://ricardo2s.me",
+      "name": "Ricardo Dos Santos - Product & UX Designer",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@id": "https://ricardo2s.me/#ricardo"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ricardo2s.me/#ricardo",
+      "name": "Ricardo Dos Santos",
+      "givenName": "Ricardo",
+      "familyName": "Dos Santos",
+      "url": "https://ricardo2s.me",
+      "email": "yo@ricardo2s.me",
+      "image": "https://ricardo2s.me/img/portrait-mountain.jpg",
+      "jobTitle": "Product Designer",
+      "description": "Product and UX designer working at the seam of design and code. Design engineering, AI-assisted prototyping and design systems for dense, complex software. Product Designer at OneHQ since 2022, based in Sondrio, Italy, and open to new work.",
+      "knowsLanguage": [
+        "en",
+        "es",
+        "it"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "OneHQ",
+        "url": "https://onehq.com",
+        "description": "Enterprise CRM for the insurance industry."
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Product Designer",
+        "occupationalCategory": "15-1255.00",
+        "skills": "Product design, UX design, design engineering, design systems, interaction design, prototyping, usability testing, contextual inquiry"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sondrio",
+        "addressRegion": "Lombardy",
+        "addressCountry": "IT"
+      },
+      "knowsAbout": [
+        "Product design",
+        "User experience design",
+        "Design engineering",
+        "Design systems",
+        "Interaction design",
+        "Usability testing",
+        "Contextual inquiry",
+        "User research",
+        "Enterprise software design",
+        "Workflow automation",
+        "Data-dense interfaces",
+        "Reporting tools",
+        "AI-assisted prototyping",
+        "Figma",
+        "HTML",
+        "CSS",
+        "TypeScript",
+        "React"
+      ],
+      "seeks": {
+        "@type": "Demand",
+        "name": "Senior product and UX design roles, remote or in the EU"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/dsmartinucci/",
+        "https://dribbble.com/dsmartinucci",
+        "https://www.youtube.com/watch?v=5tUJJ2RIlOk",
+        "https://www.youtube.com/watch?v=HroZjVayy50"
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://ricardo2s.me/cat/onehq-workflow#case",
+      "url": "https://ricardo2s.me/cat/onehq-workflow",
+      "headline": "Workflow Automation Builder - design case study",
+      "name": "Workflow Automation Builder",
+      "description": "A node-based automation builder that let insurance account managers own their own workflows without going through engineering. 847 automations in the first 90 days and three shadow Zapier accounts decommissioned. Renaming one trigger moved comprehension from 42% to 89%.",
+      "datePublished": "2025",
+      "inLanguage": "en",
+      "about": [
+        "Workflow automation",
+        "Node-based editors",
+        "Enterprise UX",
+        "Naming and information design"
+      ],
+      "author": {
+        "@id": "https://ricardo2s.me/#ricardo"
+      },
+      "publisher": {
+        "@id": "https://ricardo2s.me/#ricardo"
+      },
+      "isPartOf": {
+        "@id": "https://ricardo2s.me/#page"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://ricardo2s.me/cat/onehq-comhub#case",
+      "url": "https://ricardo2s.me/cat/onehq-comhub",
+      "headline": "Work & Communication Hub - design case study",
+      "name": "Work & Communication Hub",
+      "description": "A persistent workbar and a Speed Work mode for power users. Median time-to-send fell from 47 to 19 seconds and context switches per send from 6.2 to 2.1. The argument that won was that 12% of users drive 58% of sends.",
+      "datePublished": "2024",
+      "inLanguage": "en",
+      "about": [
+        "Product design",
+        "Power-user workflows",
+        "Optimistic UI",
+        "Enterprise UX"
+      ],
+      "author": {
+        "@id": "https://ricardo2s.me/#ricardo"
+      },
+      "publisher": {
+        "@id": "https://ricardo2s.me/#ricardo"
+      },
+      "isPartOf": {
+        "@id": "https://ricardo2s.me/#page"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://ricardo2s.me/cat/onehq-reports#case",
+      "url": "https://ricardo2s.me/cat/onehq-reports",
+      "headline": "Report Builder - design case study",
+      "name": "Report Builder",
+      "description": "Replaced a manual slides-and-exports process with a canvas that composes reports from live data, with freeze-dated snapshots and scheduled delivery. Monthly report prep fell from 4h 28m to 22 minutes.",
+      "datePublished": "2023",
+      "inLanguage": "en",
+      "about": [
+        "Data visualisation",
+        "Reporting tools",
+        "Versioning and snapshots",
+        "Enterprise UX"
+      ],
+      "author": {
+        "@id": "https://ricardo2s.me/#ricardo"
+      },
+      "publisher": {
+        "@id": "https://ricardo2s.me/#ricardo"
+      },
+      "isPartOf": {
+        "@id": "https://ricardo2s.me/#page"
+      }
+    }
+  ]
+}
   </script>
 
   <link rel="stylesheet" href="style.css" />
@@ -61,8 +199,8 @@
              alt="Ricardo Dos Santos, with the Valtellina valley and snow-topped Alps behind him" />
 
         <div class="intro">
-          <p><span class="name">Ricardo Dos Santos</span> is a product &amp; UX designer working at the seam of design and code.</p>
-          <p class="dim">Based in Sondrio, Italy. Currently at OneHQ.</p>
+          <h1><span class="name">Ricardo Dos Santos</span> is a product &amp; UX designer working at the seam of design and code.</h1>
+          <p class="dim">Based in Sondrio, Italy. Currently at OneHQ. Open to new work.</p>
         </div>
 
         <section class="section" id="experience">
