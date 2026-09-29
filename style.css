@@ -65,7 +65,7 @@ img, video { display: block; max-width: 100%; height: auto; }
   width: 100%;
   max-width: var(--col);
   margin: 0 auto;
-  padding: 128px 24px 120px;
+  padding: 68px 24px 120px;
 }
 
 .page { display: none; }
