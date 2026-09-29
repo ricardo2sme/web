@@ -213,22 +213,33 @@ a.row-sub:hover {
 }
 .kv .dim { color: var(--dim); }
 
-.case-tldr { margin-bottom: 48px; }
+/* The first thing anyone reads. Given a rule and a little more size
+   so it carries the summary rather than blending into the page. */
+.case-tldr {
+  margin-bottom: 52px;
+  padding-left: 18px;
+  border-left: 2px solid var(--fg);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg);
+}
 
 .case-tldr-label {
   display: block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--dim);
   margin-bottom: 8px;
 }
 
-.case-tldr { color: var(--fg); }
-
 .case-h2 {
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--fg);
   margin: 64px 0 20px;
-  padding-top: 24px;
+  padding-top: 26px;
   border-top: 1px solid var(--line);
 }
 
@@ -269,6 +280,14 @@ figure.case-img {
 }
 figure.case-img img,
 figure.case-img video { width: 100%; }
+
+figure.case-img figcaption {
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--dim);
+}
 
 /* ascii diagrams */
 .diagram {
@@ -318,6 +337,10 @@ figure.case-img video { width: 100%; }
 .case-metric-value .arrow { color: var(--faint); margin: 0 8px; }
 
 .case-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
   margin-top: 72px;
   padding-top: 24px;
   border-top: 1px solid var(--line);

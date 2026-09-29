@@ -298,6 +298,7 @@
         <h1 class="case-title">Workflow Automation Builder</h1>
 
         <div class="case-meta">
+          <div class="kv"><span class="dim">year</span><span>2025</span></div>
           <div class="kv"><span class="dim">client</span><span>OneHQ</span></div>
           <div class="kv"><span class="dim">role</span><span>Product Designer (IC)</span></div>
           <div class="kv"><span class="dim">team</span><span>1 PM · 3 Engineers · 1 Designer</span></div>
@@ -311,10 +312,12 @@
         </div>
 
         <figure class="case-img hero case-video">
-          <video src="img/workflow-entry.mp4" autoplay loop muted playsinline></video>
+          <video src="img/workflow-entry.mp4" autoplay loop muted playsinline
+                 aria-label="The workflow builder: the three-step wizard and the node sidebar"></video>
+          <figcaption>The builder itself: the Setup / Flow / Launch wizard, with the node list on the right.</figcaption>
         </figure>
 
-        <h2 class="case-h2">how this started</h2>
+        <h2 class="case-h2">How this started</h2>
         <p>
           Every repetitive process the team ran lived in someone's head or someone's spreadsheet. Policy renewals due in 30 days: one account manager had a color-coded Excel file she ran every Monday. Claim status changes: copy-pasted into an email, manually. Inbound form submissions: forwarded to the right person, by memory.
         </p>
@@ -327,7 +330,7 @@
           <span class="attr">D., account manager</span>
         </div>
 
-        <h2 class="case-h2">what I mapped before opening Figma</h2>
+        <h2 class="case-h2">What I mapped before opening Figma</h2>
         <p>
           I spent two weeks watching the team work. Not what they described in interviews. What they actually did.
         </p>
@@ -349,7 +352,7 @@
           The Zapier accounts were the signal. When people solve a problem outside the product with their own money, the product has failed them. They didn't need convincing. They needed something better.
         </p>
 
-        <h2 class="case-h2">the design bet: graph, not recipe</h2>
+        <h2 class="case-h2">The design bet: graph, not recipe</h2>
         <p>
           Recipe-style automation (when X, do Y) would have covered about 70% of the use cases. The other 30% required branching: if a client responds within 48 hours, do this; if not, do that. For an insurance CRM, that 30% holds most of the actual value. Renewals are conditional. Claims routing is conditional. Everything downstream of an inbound request is conditional.
         </p>
@@ -379,9 +382,10 @@
 
         <figure class="case-img">
           <img src="img/workflow-triggers.png" alt="Trigger selection sidebar with 9 trigger types and descriptions" loading="lazy" />
+          <figcaption>Trigger selection sidebar with 9 trigger types and descriptions</figcaption>
         </figure>
 
-        <h2 class="case-h2">the trigger list (six weeks to define nine types)</h2>
+        <h2 class="case-h2">The trigger list (six weeks to define nine types)</h2>
         <p>
           We launched with nine triggers: Manual, On Schedule, On Field Change, On Email Received, On Chat Message, HTTP Request, On App Event, On Form Submission, Triggered by Another Workflow.
         </p>
@@ -391,15 +395,17 @@
 
         <figure class="case-img">
           <img src="img/workflow-actions.png" alt="Action node list: Conditionals, Pull Record Data, Create Follow-up, Update Record Field, Send Email and more" loading="lazy" />
+          <figcaption>Action node list: Conditionals, Pull Record Data, Create Follow-up, Update Record Field, Send Email and more</figcaption>
         </figure>
 
-        <h2 class="case-h2">node config: always inline, never a modal</h2>
+        <h2 class="case-h2">Node config: always inline, never a modal</h2>
         <p>
           Each node opens its settings in a right panel that stays open. Not a modal, never a modal. Account managers need to look at other nodes in the canvas while they configure a new one. A modal blocks that. A panel doesn't.
         </p>
 
         <figure class="case-img">
           <img src="img/workflow-schedule.png" alt="On Schedule trigger config: frequency, time of day, trigger on weekends toggle" loading="lazy" />
+          <figcaption>On Schedule trigger config: frequency, time of day, trigger on weekends toggle</figcaption>
         </figure>
 
         <p>
@@ -408,21 +414,23 @@
 
         <figure class="case-img">
           <img src="img/workflow-if.png" alt="IF conditional node config: field selector, condition, value, And/Or logic" loading="lazy" />
+          <figcaption>IF conditional node config: field selector, condition, value, And/Or logic</figcaption>
         </figure>
 
-        <h2 class="case-h2">what the IF node taught me about naming</h2>
+        <h2 class="case-h2">What the IF node taught me about naming</h2>
         <p>
           The branch node ships as "If." In testing we called it "Conditional," "Branch," "Route," and "Filter." "If" was the only name that didn't need a sentence of explanation after it.
         </p>
         <p>
-          The True/False labels on the output connectors caused the most confusion of anything in the product. We tested "Yes/No," "Match/No match," "Pass/Fail." Nothing landed cleanly. True/False survived because it's what people already knew from spreadsheet formulas and Zapier. Not great but familiar. We kept it.
+          The True/False labels on the output connectors caused the most confusion of anything in the product. We tested "Yes/No," "Match/No match," "Pass/Fail." Nothing landed cleanly. True/False survived because it's what people already knew from spreadsheet formulas and Zapier. Not great, but familiar. We kept it.
         </p>
 
         <figure class="case-img">
           <img src="img/workflow-canvas.png" alt="Workflow canvas showing multi-input Merge node with Input 1 and Input 2 labeled connectors" loading="lazy" />
+          <figcaption>Workflow canvas showing multi-input Merge node with Input 1 and Input 2 labeled connectors</figcaption>
         </figure>
 
-        <h2 class="case-h2">what shipped, what got cut</h2>
+        <h2 class="case-h2">What shipped, what got cut</h2>
         <div class="shipcut">
           <div class="shipcut-col shipped">
             <h4>shipped</h4>
@@ -449,7 +457,7 @@
           </div>
         </div>
 
-        <h2 class="case-h2">what I'd do differently</h2>
+        <h2 class="case-h2">What I'd do differently</h2>
         <p>
           Data mapping is the hardest interaction in the product and I gave it the least design time. The "/" shortcut works but it's nearly invisible. I'd spend a full sprint just on discoverability before shipping.
         </p>
@@ -460,7 +468,10 @@
           And I'd ship run history on day one. Without it, debugging a broken workflow means re-running it manually and watching the canvas. That's fine for builders but terrible for the ops person who inherited a flow they didn't write.
         </p>
 
-        <div class="case-foot"><a class="link" href="/">← Ricardo Dos Santos</a></div>
+        <div class="case-foot">
+          <a class="link" href="/">← All of Ricardo's work</a>
+          <a class="link" href="/cat/onehq-comhub">Next case: Work &amp; Communication Hub →</a>
+        </div>
       </section>
 
       <section class="page page-case" id="page-com-hub">
@@ -469,6 +480,7 @@
         <h1 class="case-title">Work &amp; Communication Hub</h1>
 
         <div class="case-meta">
+          <div class="kv"><span class="dim">year</span><span>2024</span></div>
           <div class="kv"><span class="dim">client</span><span>OneHQ</span></div>
           <div class="kv"><span class="dim">role</span><span>Product Designer (IC)</span></div>
           <div class="kv"><span class="dim">team</span><span>1 PM · 2 Engineers · 1 Designer</span></div>
@@ -483,9 +495,10 @@
 
         <figure class="case-img hero">
           <img src="img/comhub-hero.png" alt="OneHQ Work & Communication Hub hero screen" loading="lazy" />
+          <figcaption>OneHQ Work & Communication Hub hero screen</figcaption>
         </figure>
 
-        <h2 class="case-h2">how this started</h2>
+        <h2 class="case-h2">How this started</h2>
         <p>
           Our best rep had seven product tabs open when I shadowed her one morning. She was sending a renewal reminder. She'd normalized it.
         </p>
@@ -498,7 +511,7 @@
           <span class="attr">Ang, account manager</span>
         </div>
 
-        <h2 class="case-h2">what we measured before touching anything</h2>
+        <h2 class="case-h2">What we measured before touching anything</h2>
         <p>
           I refused to open Figma until we had numbers. Every improvement had to map back to one of these.
         </p>
@@ -522,7 +535,7 @@
           </div>
         </div>
 
-        <h2 class="case-h2">the design bet: one surface, always visible</h2>
+        <h2 class="case-h2">The design bet: one surface, always visible</h2>
         <p>
           We weighed three directions.
         </p>
@@ -548,29 +561,31 @@
 
         <figure class="case-img">
           <img src="img/comhub-workbar.png" alt="Persistent workbar: campaign, template, speed toggle, send" loading="lazy" />
+          <figcaption>Persistent workbar: campaign, template, speed toggle, send</figcaption>
         </figure>
 
         <p>
           The workbar stays visible across the whole workspace. You open a client, the workbar knows. You switch to a thread, it follows. Campaign and template live as dropdowns. Send lives there. That's the whole ceremony.
         </p>
 
-        <h2 class="case-h2">speed work (the unpopular idea)</h2>
+        <h2 class="case-h2">Speed work (the unpopular idea)</h2>
         <p>
           Power users kept telling us they didn't need the preview. They didn't need the confirm modal. They wanted a button that fired.
         </p>
         <p>
-          Building a "power mode" for 12% of users is a hard sell. It looks like scope creep. The pitch that landed wasn't "power users want this." It was: <span class="hl">those 12% of users drive 58% of our sends. When they're slow revenue is slow.</span>
+          Building a "power mode" for 12% of users is a hard sell. It looks like scope creep. The pitch that landed wasn't "power users want this." It was: <span class="hl">those 12% of users drive 58% of our sends. When they're slow, revenue is slow.</span>
         </p>
 
         <figure class="case-img">
           <img src="img/comhub-speedwork.png" alt="Speed Work mode with minimal UI and optimistic send" loading="lazy" />
+          <figcaption>Speed Work mode with minimal UI and optimistic send</figcaption>
         </figure>
 
         <p>
-          Speed Work is one toggle. On: no preview modal, optimistic send, a 5-second undo toast. Off: the default path, unchanged. No one was forced to use it. It spread anyway user to user, the way good tools do.
+          Speed Work is one toggle. On: no preview modal, optimistic send, a 5-second undo toast. Off: the default path, unchanged. No one was forced to use it. It spread anyway, user to user, the way good tools do.
         </p>
 
-        <h2 class="case-h2">ownership (the thing I underestimated)</h2>
+        <h2 class="case-h2">Ownership (the thing I underestimated)</h2>
         <p>
           "Who's sending this one" sounded like a polish issue. It wasn't. I lost two weeks to it. In a team of 8 reps covering 400 clients, message authorship is a coordination problem, not a display problem.
         </p>
@@ -580,9 +595,10 @@
 
         <figure class="case-img">
           <img src="img/comhub-preview.png" alt="Preview dialog with sender identity and template variable diff" loading="lazy" />
+          <figcaption>Preview dialog with sender identity and template variable diff</figcaption>
         </figure>
 
-        <h2 class="case-h2">what shipped, what got cut</h2>
+        <h2 class="case-h2">What shipped, what got cut</h2>
         <div class="shipcut">
           <div class="shipcut-col shipped">
             <h4>shipped</h4>
@@ -605,7 +621,7 @@
           </div>
         </div>
 
-        <h2 class="case-h2">what I'd do differently</h2>
+        <h2 class="case-h2">What I'd do differently</h2>
         <p>
           The first version of the workbar had too many features. I tried to solve three problems at once. We stripped it twice before launch and it still felt busy. Next time I'd start with a smaller workbar and earn the real estate.
         </p>
@@ -613,7 +629,10 @@
           I also shipped Speed Work without an onboarding flow, assuming it'd spread organically. It did, but slowly. A 20-second tooltip tour would have cut adoption time in half.
         </p>
 
-        <div class="case-foot"><a class="link" href="/">← Ricardo Dos Santos</a></div>
+        <div class="case-foot">
+          <a class="link" href="/">← All of Ricardo's work</a>
+          <a class="link" href="/cat/onehq-reports">Next case: Report Builder →</a>
+        </div>
       </section>
 
       <section class="page page-case" id="page-reports">
@@ -622,6 +641,7 @@
         <h1 class="case-title">Report Builder</h1>
 
         <div class="case-meta">
+          <div class="kv"><span class="dim">year</span><span>2023</span></div>
           <div class="kv"><span class="dim">client</span><span>OneHQ</span></div>
           <div class="kv"><span class="dim">role</span><span>Product Designer (IC)</span></div>
           <div class="kv"><span class="dim">team</span><span>2 Engineers · 1 Designer</span></div>
@@ -636,11 +656,12 @@
 
         <figure class="case-img hero">
           <img src="img/reports-hero.png" alt="Report Builder hero screen" loading="lazy" />
+          <figcaption>Report Builder hero screen</figcaption>
         </figure>
 
-        <h2 class="case-h2">the backstory</h2>
+        <h2 class="case-h2">The backstory</h2>
         <p>
-          Every month, account managers pulled data out of the product, pasted it into slides, branded it, and emailed it to clients. Every month something broke. Someone spelled Travelers as Traveler's. A KPI was from the wrong date range. A logo was outdated.
+          Every month, account managers pulled data out of the product, pasted it into slides, branded it, and emailed it to clients. Every month, something broke. Someone spelled Travelers as Traveler's. A KPI was from the wrong date range. A logo was outdated.
         </p>
         <p>
           A previous team had shipped a form-based export tool. Nobody used it. Opening it was the running joke on the account team.
@@ -651,7 +672,7 @@
           <span class="attr">M., senior account manager</span>
         </div>
 
-        <h2 class="case-h2">what I did before designing anything</h2>
+        <h2 class="case-h2">What I did before designing anything</h2>
         <ol class="case-list numbered">
           <li>Read 180 support tickets tagged "reporting."</li>
           <li>Sat with four account managers through a full monthly cycle (two weeks each).</li>
@@ -661,7 +682,7 @@
           Three of twelve had numbers that didn't match our own database. Not because anyone was careless. The copy-paste window was just too wide.
         </p>
 
-        <h2 class="case-h2">the bet: a canvas, not a form</h2>
+        <h2 class="case-h2">The bet: a canvas, not a form</h2>
         <p>
           The form-based version failed because forms force you to think in fields. Reporting is visual. You need to see the thing you're making.
         </p>
@@ -686,13 +707,14 @@
 
         <figure class="case-img">
           <img src="img/reports-canvas.png" alt="Report canvas with sections, blocks, and settings panel" loading="lazy" />
+          <figcaption>Report canvas with sections, blocks, and settings panel</figcaption>
         </figure>
 
         <p>
           The risk was that canvases invite Figma-level expectations. We scoped it hard: five section types, seven block types, no freeform positioning. If you wanted a custom layout, the answer was no. That was an unpopular stance and it held.
         </p>
 
-        <h2 class="case-h2">versioning (the actually hard part)</h2>
+        <h2 class="case-h2">Versioning (the actually hard part)</h2>
         <p>
           I thought versioning would be a footer with a date. It took eight weeks.
         </p>
@@ -708,9 +730,10 @@
 
         <figure class="case-img">
           <img src="img/reports-history.png" alt="Publishing history with thumbnail timeline of versions" loading="lazy" />
+          <figcaption>Publishing history with thumbnail timeline of versions</figcaption>
         </figure>
 
-        <h2 class="case-h2">scheduling (almost got cut)</h2>
+        <h2 class="case-h2">Scheduling (almost got cut)</h2>
         <p>
           Scheduling kept almost getting cut. Engineering flagged risk three times. The PM pushed back twice.
         </p>
@@ -718,10 +741,10 @@
           I pushed for it because of one observation. The actual bottleneck on reporting wasn't writing the report. It was remembering to send it. 38% of delayed-report support tickets were "I forgot to send it on Friday."
         </p>
         <p>
-          It shipped. Recurring weekly and monthly, timezone aware, natural-language summary ("every first Monday at 9am ET"), one-click pause, next-send preview. Within three months scheduling accounted for 72% of all sends.
+          It shipped. Recurring weekly and monthly, timezone aware, natural-language summary ("every first Monday at 9am ET"), one-click pause, next-send preview. Within three months, scheduling accounted for 72% of all sends.
         </p>
 
-        <h2 class="case-h2">in-place chart editing</h2>
+        <h2 class="case-h2">In-place chart editing</h2>
         <p>
           Small one, worth mentioning. Charts are editable directly on the canvas, not in a separate modal. Change the type, color, grouping, date range, live.
         </p>
@@ -731,9 +754,10 @@
 
         <figure class="case-img">
           <img src="img/reports-inplace.png" alt="In-place chart editing on the canvas" loading="lazy" />
+          <figcaption>In-place chart editing on the canvas</figcaption>
         </figure>
 
-        <h2 class="case-h2">what I'd do differently</h2>
+        <h2 class="case-h2">What I'd do differently</h2>
         <p>
           I over-engineered the block types. We shipped seven. Users live inside three of them (KPI, table, chart). The other four are dead weight maintained at cost. Next time I'd ship three, wait six months, add based on what users actually ask for.
         </p>
@@ -741,7 +765,10 @@
           Publishing history is fine, but it should have been reachable from outside the builder. You still have to open a report to see its history. A portfolio-level "all reports ever sent" view is the first thing users ask for, and it's still on the backlog.
         </p>
 
-        <div class="case-foot"><a class="link" href="/">← Ricardo Dos Santos</a></div>
+        <div class="case-foot">
+          <a class="link" href="/">← All of Ricardo's work</a>
+          <a class="link" href="/cat/onehq-workflow">Next case: Workflow Automation Builder →</a>
+        </div>
       </section>
     </main>
   </div>
