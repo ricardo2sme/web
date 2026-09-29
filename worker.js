@@ -10,7 +10,7 @@
    ============================================= */
 
 const SITE = 'https://ricardo2s.me';
-const IMAGE = `${SITE}/og.jpg`;
+const IMAGE = `${SITE}/og-mountain.jpg`;
 
 /* /works is canonical. The other two are the spellings people reach
    for, redirected rather than duplicated so the index has one URL. */
